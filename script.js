@@ -686,6 +686,203 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  window.addEventListener("scroll", runStatsCounter, { passive: true });
-  runStatsCounter();
+  // 13. 60-Second Diagnostic Micro-Quiz Engine
+  const quizQuestions = [
+    {
+      topic: "ACADEMIC VOCABULARY IN CONTEXT",
+      question: '"The research findings were __________ with previous clinical trials, demonstrating reliable efficacy across cohorts."',
+      options: [
+        { letter: "A", text: "inconsistent" },
+        { letter: "B", text: "congruent" },
+        { letter: "C", text: "haphazard" },
+        { letter: "D", text: "tentative" }
+      ],
+      correctIndex: 1,
+      explanation: '"Congruent" denotes in agreement or harmony with prior findings, satisfying the positive semantic context of "demonstrating reliable efficacy".'
+    },
+    {
+      topic: "COMPLEX SYNTAX & SUBJECT-VERB AGREEMENT",
+      question: '"Neither the head physician nor the attending nurses __________ informed about the revised emergency trauma schedule."',
+      options: [
+        { letter: "A", text: "was" },
+        { letter: "B", text: "were" },
+        { letter: "C", text: "has been" },
+        { letter: "D", text: "is" }
+      ],
+      correctIndex: 1,
+      explanation: 'With correlative conjunctions like "Neither... nor...", the verb agrees with the closer subject ("attending nurses" - plural -> "were").'
+    },
+    {
+      topic: "ACADEMIC COLLOCATION & REGISTER",
+      question: '"During executive cross-examinations, expert witnesses must provide data that can __________ rigorous analytical scrutiny."',
+      options: [
+        { letter: "A", text: "stand up to" },
+        { letter: "B", text: "put up with" },
+        { letter: "C", text: "fall through" },
+        { letter: "D", text: "run away from" }
+      ],
+      correctIndex: 0,
+      explanation: '"Stand up to" is the formal idiom meaning to withstand or endure rigorous analytical scrutiny without failing.'
+    }
+  ];
+
+  let currentQuizIndex = 0;
+  let quizScore = 0;
+  let quizAnswering = false;
+
+  const quizCard = document.getElementById("quizCard");
+  const quizProgressFill = document.getElementById("quizProgressFill");
+  const quizStepLabel = document.getElementById("quizStepLabel");
+  const quizTopicLabel = document.getElementById("quizTopicLabel");
+  const quizQuestionWrap = document.getElementById("quizQuestionWrap");
+  const quizQuestionText = document.getElementById("quizQuestionText");
+  const quizOptionsList = document.getElementById("quizOptionsList");
+  const quizResultWrap = document.getElementById("quizResultWrap");
+  const quizScorePill = document.getElementById("quizScorePill");
+  const quizBandPill = document.getElementById("quizBandPill");
+  const quizResultTitle = document.getElementById("quizResultTitle");
+  const quizResultNarrative = document.getElementById("quizResultNarrative");
+  const quizRestartBtn = document.getElementById("quizRestartBtn");
+  const quizWhatsappBtn = document.getElementById("quizWhatsappBtn");
+
+  function renderQuizQuestion(index) {
+    if (!quizQuestionWrap || !quizOptionsList) return;
+    const q = quizQuestions[index];
+    quizAnswering = false;
+
+    // Update progress & labels
+    const progressPct = ((index + 1) / quizQuestions.length) * 100;
+    if (quizProgressFill) quizProgressFill.style.width = `${progressPct}%`;
+    if (quizStepLabel) quizStepLabel.textContent = `QUESTION ${index + 1} OF ${quizQuestions.length}`;
+    if (quizTopicLabel) quizTopicLabel.textContent = q.topic;
+    if (quizQuestionText) quizQuestionText.textContent = q.question;
+
+    // Render options
+    quizOptionsList.innerHTML = q.options
+      .map(
+        (opt, optIdx) => `
+        <button type="button" class="quiz-option-btn" data-index="${optIdx}">
+          <span class="option-letter">${opt.letter}</span>
+          <span class="option-text">${opt.text}</span>
+        </button>
+      `
+      )
+      .join("");
+
+    // Attach click listeners to options
+    const optionBtns = quizOptionsList.querySelectorAll(".quiz-option-btn");
+    optionBtns.forEach((btn) => {
+      btn.addEventListener("click", () => handleQuizOptionSelect(parseInt(btn.getAttribute("data-index"), 10)));
+    });
+  }
+
+  function handleQuizOptionSelect(selectedIdx) {
+    if (quizAnswering) return;
+    quizAnswering = true;
+
+    const q = quizQuestions[currentQuizIndex];
+    const optionBtns = quizOptionsList.querySelectorAll(".quiz-option-btn");
+    const isCorrect = selectedIdx === q.correctIndex;
+
+    if (isCorrect) quizScore++;
+
+    optionBtns.forEach((btn, idx) => {
+      btn.style.pointerEvents = "none";
+      if (idx === q.correctIndex) {
+        btn.classList.add("correct");
+      } else if (idx === selectedIdx && !isCorrect) {
+        btn.classList.add("wrong");
+      }
+    });
+
+    // Advance after brief pause
+    setTimeout(() => {
+      currentQuizIndex++;
+      if (currentQuizIndex < quizQuestions.length) {
+        renderQuizQuestion(currentQuizIndex);
+      } else {
+        showQuizResults();
+      }
+    }, 750);
+  }
+
+  function showQuizResults() {
+    if (quizQuestionWrap) quizQuestionWrap.style.display = "none";
+    if (quizProgressFill) quizProgressFill.style.width = "100%";
+    if (quizStepLabel) quizStepLabel.textContent = "DIAGNOSTIC COMPLETE";
+    if (quizTopicLabel) quizTopicLabel.textContent = "ASSESSMENT SUMMARY";
+    if (quizResultWrap) quizResultWrap.style.display = "block";
+
+    let bandText = "";
+    let headline = "";
+    let narrative = "";
+    let waMessage = "";
+
+    if (quizScore === 3) {
+      bandText = "ESTIMATED BAND 8.0+ / C1 ADVANCED";
+      headline = "Outstanding Academic Proficiency!";
+      narrative =
+        "Your grasp of context-dependent lexical resources and formal syntax places you in the top tier. With fine-tuned time heuristics, you are primed for Band 8.0+ in IELTS or 79+ in PTE.";
+      waMessage =
+        "Hello Prof. Avijit Majumdar, I took your 60-Second Diagnostic Quiz on English Pathshala and scored 3/3 (Band 8.0+ / C1 Advanced). I would like my detailed assessment breakdown and customized prep roadmap!";
+    } else if (quizScore === 2) {
+      bandText = "ESTIMATED BAND 7.0 - 7.5 / B2-C1";
+      headline = "Strong Foundation with High Upside!";
+      narrative =
+        "You possess solid foundational fluency and good register control. Targeted drills on complex correlatives and high-register academic vocabulary can rapidly push you to Band 8.0+.";
+      waMessage =
+        "Hello Prof. Avijit Majumdar, I took your 60-Second Diagnostic Quiz on English Pathshala and scored 2/3 (Band 7.0-7.5). I would like to review the question I missed and discuss preparation strategies.";
+    } else {
+      bandText = "ESTIMATED BAND 6.0 - 6.5 / B1-B2";
+      headline = "High Growth Potential Detected!";
+      narrative =
+        "You have clear communicative capability, but nuanced grammar rules and distractor traps in academic English are holding back your score. Our 4-step structured diagnostic pedagogy will rapidly solidify your syntax.";
+      waMessage = `Hello Prof. Avijit Majumdar, I took your 60-Second Diagnostic Quiz on English Pathshala and scored ${quizScore}/3. I would like your guidance on core grammar mastery and an exam roadmap.`;
+    }
+
+    if (quizScorePill) quizScorePill.textContent = `SCORE: ${quizScore}/${quizQuestions.length} CORRECT`;
+    if (quizBandPill) quizBandPill.textContent = bandText;
+    if (quizResultTitle) quizResultTitle.textContent = headline;
+    if (quizResultNarrative) quizResultNarrative.textContent = narrative;
+
+    if (quizWhatsappBtn) {
+      quizWhatsappBtn.onclick = () => {
+        window.open(`https://wa.me/917003876568?text=${encodeURIComponent(waMessage)}`, "_blank");
+      };
+    }
+
+    if (window.lucide) window.lucide.createIcons();
+  }
+
+  quizRestartBtn?.addEventListener("click", () => {
+    currentQuizIndex = 0;
+    quizScore = 0;
+    if (quizResultWrap) quizResultWrap.style.display = "none";
+    if (quizQuestionWrap) quizQuestionWrap.style.display = "block";
+    renderQuizQuestion(0);
+  });
+
+  // Initialize Quiz on first question
+  if (quizCard) {
+    renderQuizQuestion(0);
+  }
+
+  // 14. Linear / Vercel Interactive Mouse-Follow Radial Border Glow
+  const glowCards = document.querySelectorAll(
+    ".cyber-card, .bento-card, .review-bento-card, .calculator-cyber-card, .quiz-cyber-card"
+  );
+  glowCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.removeProperty("--mouse-x");
+      card.style.removeProperty("--mouse-y");
+    });
+  });
 });
+

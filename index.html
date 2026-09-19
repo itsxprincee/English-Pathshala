@@ -94,6 +94,7 @@
         <li><a href="#about" class="nav-pill-link">Mentor</a></li>
         <li><a href="#courses" class="nav-pill-link">Programs</a></li>
         <li><a href="#reviews" class="nav-pill-link">Results</a></li>
+        <li><a href="#quiz" class="nav-pill-link">Quiz</a></li>
         <li><a href="#faq" class="nav-pill-link">FAQ</a></li>
       </ul>
 
@@ -116,9 +117,10 @@
     <div class="mobile-menu-drawer" id="mobileMenu" aria-hidden="true">
       <ul class="mobile-drawer-links">
         <li><a href="#calculator" class="mobile-drawer-link">Interactive Calculator</a></li>
-        <li><a href="#mentor" class="mobile-drawer-link">About Prof. Avijit Majumdar</a></li>
+        <li><a href="#about" class="mobile-drawer-link">About Prof. Avijit Majumdar</a></li>
         <li><a href="#courses" class="mobile-drawer-link">12 Global Courses</a></li>
         <li><a href="#reviews" class="mobile-drawer-link">Verified Student Results</a></li>
+        <li><a href="#quiz" class="mobile-drawer-link">60-Sec Diagnostic Quiz</a></li>
         <li><a href="#faq" class="mobile-drawer-link">Frequently Asked Questions</a></li>
         <li><a href="#contact" class="mobile-drawer-link">Book Free Consultation</a></li>
       </ul>
@@ -911,6 +913,77 @@
                 <strong class="author-name">Harsh Modi</strong>
                 <span class="author-title">Software Engineer &bull; Australia Visa Approved</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: 60-Second Diagnostic Micro-Quiz -->
+    <section class="section-padding quiz-tech-section" id="quiz">
+      <div class="container-custom max-w-3xl">
+        <div class="section-tech-header text-center">
+          <div class="cyber-badge mb-3"><i data-lucide="help-circle"></i> 60-SECOND DIAGNOSTIC</div>
+          <h2 class="section-tech-title">Quick Proficiency Assessment</h2>
+          <p class="section-tech-subtitle">
+            Answer 3 rapid-fire questions to benchmark your grammatical range, syntax precision, and vocabulary readiness.
+          </p>
+        </div>
+
+        <div class="quiz-cyber-card" id="quizCard">
+          <!-- Quiz Progress Indicator -->
+          <div class="quiz-progress-bar-wrap">
+            <div class="quiz-progress-fill" id="quizProgressFill" style="width: 33.33%;"></div>
+          </div>
+          <div class="quiz-meta-row">
+            <span class="quiz-step-label" id="quizStepLabel">QUESTION 1 OF 3</span>
+            <span class="quiz-topic-label" id="quizTopicLabel">ACADEMIC VOCABULARY IN CONTEXT</span>
+          </div>
+
+          <!-- Question Content Container (Managed by script.js) -->
+          <div class="quiz-question-wrap" id="quizQuestionWrap">
+            <h3 class="quiz-question-text" id="quizQuestionText">
+              "The research findings were __________ with previous clinical trials, demonstrating reliable efficacy across cohorts."
+            </h3>
+            <div class="quiz-options-list" id="quizOptionsList">
+              <button type="button" class="quiz-option-btn" data-index="0">
+                <span class="option-letter">A</span>
+                <span class="option-text">inconsistent</span>
+              </button>
+              <button type="button" class="quiz-option-btn" data-index="1">
+                <span class="option-letter">B</span>
+                <span class="option-text">congruent</span>
+              </button>
+              <button type="button" class="quiz-option-btn" data-index="2">
+                <span class="option-letter">C</span>
+                <span class="option-text">haphazard</span>
+              </button>
+              <button type="button" class="quiz-option-btn" data-index="3">
+                <span class="option-letter">D</span>
+                <span class="option-text">tentative</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Results Box (Hidden until completion) -->
+          <div class="quiz-result-wrap" id="quizResultWrap" style="display: none;">
+            <div class="result-badge-row">
+              <span class="quiz-score-pill" id="quizScorePill">SCORE: 3/3 CORRECT</span>
+              <span class="quiz-band-pill" id="quizBandPill">ESTIMATED BAND 8.0+ / C1 ADVANCED</span>
+            </div>
+            <h3 class="result-headline" id="quizResultTitle">Outstanding Academic Proficiency!</h3>
+            <p class="result-narrative" id="quizResultNarrative">
+              Your grasp of context-dependent lexical resources and formal syntax places you in the top tier. With fine-tuned time heuristics, you are primed for Band 8.0+ in IELTS or 79+ in PTE.
+            </p>
+            <div class="result-actions-row">
+              <button type="button" class="btn btn-cyber-ghost btn-sm" id="quizRestartBtn">
+                <i data-lucide="rotate-ccw"></i>
+                <span>Retake Quiz</span>
+              </button>
+              <button type="button" class="btn btn-cyber-primary btn-sm" id="quizWhatsappBtn">
+                <i data-lucide="message-circle"></i>
+                <span>Get Full Answer Key &amp; Roadmap via WhatsApp</span>
+              </button>
             </div>
           </div>
         </div>

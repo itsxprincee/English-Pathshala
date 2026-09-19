@@ -2420,3 +2420,251 @@ img {
   height: 18px;
   color: #10b981;
 }
+
+/* ==========================================================================
+   Section: 60-Second Diagnostic Micro-Quiz
+   ========================================================================== */
+.quiz-tech-section {
+  background: var(--bg-dark);
+}
+
+.quiz-cyber-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: var(--radius-xl);
+  padding: 34px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65), 0 0 35px rgba(59, 130, 246, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-progress-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  border-radius: var(--radius-pill);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quiz-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.quiz-step-label {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+}
+
+.quiz-topic-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-subtle);
+  letter-spacing: 0.06em;
+}
+
+.quiz-question-text {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text-pure);
+  line-height: 1.45;
+  margin-bottom: 24px;
+}
+
+.quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-option-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-bright);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.quiz-option-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+}
+
+.quiz-option-btn.selected {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: var(--primary);
+  color: var(--text-pure);
+}
+
+.quiz-option-btn.correct {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.quiz-option-btn.wrong {
+  background: rgba(244, 63, 94, 0.18);
+  border-color: #f43f5e;
+  color: #fb7185;
+}
+
+.option-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-bright);
+}
+
+.option-text {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+/* Quiz Results Panel */
+.quiz-result-wrap {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.quiz-score-pill {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.quiz-band-pill {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(59, 130, 246, 0.16);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.result-headline {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-pure);
+  margin-bottom: 10px;
+}
+
+.result-narrative {
+  font-size: 0.96rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+
+.result-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .quiz-cyber-card {
+    padding: 22px;
+  }
+  .result-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ==========================================================================
+   Linear / Vercel Interactive Mouse-Follow Radial Border Glow
+   ========================================================================== */
+.cyber-card,
+.bento-card,
+.review-bento-card,
+.calculator-cyber-card,
+.quiz-cyber-card {
+  position: relative;
+}
+
+.cyber-card::after,
+.bento-card::after,
+.review-bento-card::after,
+.calculator-cyber-card::after,
+.quiz-cyber-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    320px circle at var(--mouse-x, -9999px) var(--mouse-y, -9999px),
+    rgba(59, 130, 246, 0.38),
+    transparent 70%
+  );
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cyber-card:hover::after,
+.bento-card:hover::after,
+.review-bento-card:hover::after,
+.calculator-cyber-card:hover::after,
+.quiz-cyber-card:hover::after {
+  opacity: 1;
+}
+
+/* Keep card contents above the mouse follow glow */
+.cyber-card > *,
+.bento-card > *,
+.review-bento-card > *,
+.calculator-cyber-card > *,
+.quiz-cyber-card > * {
+  position: relative;
+  z-index: 1;
+}
+
