@@ -590,13 +590,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => toast.classList.remove("show"), 3500);
   };
 
-  document.getElementById("signupForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email")?.value || "";
-    showToast(`Thanks for subscribing (${email})! Starter guide sent.`);
-    e.target.reset();
-  });
-
   // 9. Modal Management System
   const courseModal = document.getElementById("courseModal");
   const enquireModal = document.getElementById("enquireModal");
@@ -643,11 +636,28 @@ document.addEventListener("DOMContentLoaded", () => {
   // Helper to select course in Enquire dropdown
   function selectEnquiryCourse(courseName) {
     const select = document.getElementById("enquiryCourse");
-    if (!select) return;
+    if (!select || !courseName) return;
     const search = courseName.toLowerCase().trim();
     for (let i = 0; i < select.options.length; i++) {
-      const opt = select.options[i];
-      if (opt.value.toLowerCase().includes(search) || search.includes(opt.value.toLowerCase().slice(0, 8))) {
+      const optVal = select.options[i].value.toLowerCase();
+      if (
+        optVal === search ||
+        optVal.includes(search) ||
+        search.includes(optVal) ||
+        (search.includes("govt") && optVal.includes("govt")) ||
+        (search.includes("board") && optVal.includes("board")) ||
+        (search.includes("olympiad") && optVal.includes("olympiad")) ||
+        (search.includes("ielts") && optVal.includes("ielts")) ||
+        (search.includes("pte") && optVal.includes("pte")) ||
+        (search.includes("oet") && optVal.includes("oet")) ||
+        (search.includes("celpip") && optVal.includes("celpip")) ||
+        (search.includes("toefl") && optVal.includes("toefl")) ||
+        (search.includes("duolingo") && optVal.includes("duolingo")) ||
+        (search.includes("spoken") && optVal.includes("spoken")) ||
+        (search.includes("everyday") && optVal.includes("everyday")) ||
+        (search.includes("interview") && optVal.includes("interview")) ||
+        (search.includes("grammar") && optVal.includes("grammar"))
+      ) {
         select.selectedIndex = i;
         return;
       }
@@ -786,7 +796,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 600);
   });
 
-  // 13. Hero Audio Play Button Animation
+  // 13. Hero Audio Play Button Animation & Pronunciation Sample
   const heroPlayBtn = document.getElementById("heroPlayBtn");
   const heroPlayIcon = document.getElementById("heroPlayIcon");
   const heroWave = document.getElementById("heroWave");
@@ -801,14 +811,46 @@ document.addEventListener("DOMContentLoaded", () => {
       heroWave.style.background = isPlaying ? "var(--primary-light)" : "var(--card-muted)";
     }
     refreshIcons();
+
     if (isPlaying) {
       showToast("Playing lesson practice audio...");
-      setTimeout(() => {
-        isPlaying = false;
-        if (heroPlayIcon) heroPlayIcon.setAttribute("data-lucide", "play");
-        if (heroWave) heroWave.style.background = "var(--card-muted)";
-        refreshIcons();
-      }, 4000);
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance("Welcome to English Pathshala. How would you describe your perfect day? Today's lesson is on conversational fluency and descriptive vocabulary.");
+        utterance.rate = 0.92;
+        utterance.pitch = 1.0;
+        const voices = window.speechSynthesis.getVoices();
+        const preferredVoice = voices.find(v => v.lang.startsWith("en-GB") || v.lang.startsWith("en-US") || v.lang.startsWith("en"));
+        if (preferredVoice) utterance.voice = preferredVoice;
+
+        utterance.onend = () => {
+          isPlaying = false;
+          if (heroPlayIcon) heroPlayIcon.setAttribute("data-lucide", "play");
+          if (heroWave) heroWave.style.background = "var(--card-muted)";
+          refreshIcons();
+        };
+        utterance.onerror = () => {
+          isPlaying = false;
+          if (heroPlayIcon) heroPlayIcon.setAttribute("data-lucide", "play");
+          if (heroWave) heroWave.style.background = "var(--card-muted)";
+          refreshIcons();
+        };
+        window.speechSynthesis.speak(utterance);
+      } else {
+        setTimeout(() => {
+          isPlaying = false;
+          if (heroPlayIcon) heroPlayIcon.setAttribute("data-lucide", "play");
+          if (heroWave) heroWave.style.background = "var(--card-muted)";
+          refreshIcons();
+        }, 4000);
+      }
+    } else {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      if (heroPlayIcon) heroPlayIcon.setAttribute("data-lucide", "play");
+      if (heroWave) heroWave.style.background = "var(--card-muted)";
+      refreshIcons();
     }
   });
 
