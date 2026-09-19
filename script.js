@@ -95,12 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 5. Course Carousel Slider & Filtering
-  const filters = document.querySelectorAll(".filter");
-  const cards = document.querySelectorAll(".course-card");
+  const filters = document.querySelectorAll(".courses-screen .filter");
+  const cards = document.querySelectorAll(".course-slider-track .course-card");
+  const sliderViewport = document.querySelector(".course-slider-viewport");
   const sliderTrack = document.getElementById("courseSliderTrack");
   const prevBtn = document.getElementById("coursePrev");
   const nextBtn = document.getElementById("courseNext");
   const counterEl = document.getElementById("courseCounter");
+  const dotsContainer = document.getElementById("courseDots");
 
   let currentSlide = 0;
 
@@ -114,6 +116,22 @@ document.addEventListener("DOMContentLoaded", () => {
     return Array.from(cards).filter((c) => !c.classList.contains("hidden"));
   }
 
+  function renderDots(totalPages) {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = "";
+    for (let i = 0; i < totalPages; i++) {
+      const dot = document.createElement("button");
+      dot.className = `slider-dot ${i === currentSlide ? "active" : ""}`;
+      dot.setAttribute("aria-label", `Go to course slide ${i + 1}`);
+      dot.type = "button";
+      dot.addEventListener("click", () => {
+        currentSlide = i;
+        updateSlider();
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
   function updateSlider() {
     const visibleCards = getVisibleCards();
     const perView = getCardsPerView();
@@ -125,7 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sliderTrack && visibleCards.length > 0) {
       const firstCard = visibleCards[0];
       const cardWidth = firstCard.getBoundingClientRect().width;
-      const gap = 20;
+      const trackStyles = window.getComputedStyle(sliderTrack);
+      const gap = parseFloat(trackStyles.gap) || 24;
       const offset = currentSlide * (cardWidth + gap) * perView;
       sliderTrack.style.transform = `translateX(-${offset}px)`;
     }
@@ -135,6 +154,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (prevBtn) prevBtn.disabled = currentSlide === 0;
     if (nextBtn) nextBtn.disabled = currentSlide >= totalPages - 1;
+
+    renderDots(totalPages);
   }
 
   prevBtn?.addEventListener("click", () => {
@@ -153,6 +174,41 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSlider();
     }
   });
+
+  // Mobile & Tablet Touch Swipe Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  sliderViewport?.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true }
+  );
+
+  sliderViewport?.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const threshold = 40;
+      const diff = touchStartX - touchEndX;
+      const visibleCards = getVisibleCards();
+      const perView = getCardsPerView();
+      const totalPages = Math.max(1, Math.ceil(visibleCards.length / perView));
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0 && currentSlide < totalPages - 1) {
+          currentSlide++;
+          updateSlider();
+        } else if (diff < 0 && currentSlide > 0) {
+          currentSlide--;
+          updateSlider();
+        }
+      }
+    },
+    { passive: true }
+  );
 
   window.addEventListener("resize", () => {
     updateSlider();
