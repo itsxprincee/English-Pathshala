@@ -1708,14 +1708,22 @@ body.dark .filter.active {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 36px;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
   margin-bottom: 48px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 680px) {
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 }
 
