@@ -1,6 +1,6 @@
 /**
- * English Pathshala — Interactive Logic & Features
- * Matches live production website features (https://www.englishpathshala.in/)
+ * English Pathshala — Dark Tech & Luxury Bento Interactive Engine
+ * Interactive Roadmap Calculator, Dynamic Modal Syllabi, and WhatsApp Leads
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.lucide.createIcons();
   }
 
-  // 2. Dark / Light Theme Manager
+  // 2. Dark / Light Visual Theme Manager
   const themeToggle = document.getElementById("themeToggle");
   const themeIcon = document.getElementById("themeIcon");
 
   function initTheme() {
     const saved = localStorage.getItem("ep_theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = saved === "dark" || (!saved && prefersDark);
+    // Default to dark luxury aesthetic
+    const isDark = saved !== "light";
     document.body.classList.toggle("dark", isDark);
     updateThemeIcon(isDark);
   }
@@ -35,18 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initTheme();
 
-  // 3. Sticky Navbar & Scroll Spy
-  const navbar = document.getElementById("topNav");
-  const navLinks = document.querySelectorAll(".nav-link, .mobile-nav-link");
+  // 3. Floating Navbar Scroll Spy & Blur Elevation
+  const navWrapper = document.getElementById("topNav");
+  const navLinks = document.querySelectorAll(".nav-pill-link");
   const sections = document.querySelectorAll("section[id]");
 
   window.addEventListener("scroll", () => {
     const scrollY = window.scrollY;
-    if (navbar) {
-      navbar.classList.toggle("scrolled", scrollY > 20);
+    if (navWrapper) {
+      navWrapper.classList.toggle("scrolled", scrollY > 20);
     }
 
-    // Scroll Spy
     let currentId = "";
     sections.forEach((section) => {
       const sectionTop = section.offsetTop - 120;
@@ -66,9 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
-  });
+  }, { passive: true });
 
-  // 4. Mobile Menu Toggle
+  // 4. Mobile Menu Drawer
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
   const menuIcon = document.getElementById("menuIcon");
@@ -82,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+  document.querySelectorAll(".mobile-drawer-link").forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu?.classList.remove("open");
       mobileMenuBtn?.setAttribute("aria-expanded", "false");
@@ -93,15 +92,131 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 5. Course Filtering
-  const filterBtns = document.querySelectorAll(".filter-tab, .filter-btn");
-  const courseCards = document.querySelectorAll(".course-card");
+  // 5. Interactive Band & Preparation Roadmap Calculator
+  const calcExam = document.getElementById("calcExam");
+  const calcLevelInput = document.getElementById("calcLevel");
+  const levelTabBtns = document.querySelectorAll(".level-tab-btn");
+  const calcHours = document.getElementById("calcHours");
+  const calcHoursLabel = document.getElementById("calcHoursLabel");
+  const resScore = document.getElementById("resScore");
+  const resTimeline = document.getElementById("resTimeline");
+  const resBatch = document.getElementById("resBatch");
+  const calcCtaBtn = document.getElementById("calcCtaBtn");
 
-  filterBtns.forEach((btn) => {
+  const calculatorMatrix = {
+    ielts: {
+      name: "IELTS Masterclass",
+      scores: { beginner: "Band 6.5 – 7.0", intermediate: "Band 7.5 – 8.0+", advanced: "Band 8.5 – 9.0" },
+      baseWeeks: { beginner: 10, intermediate: 6, advanced: 4 },
+      batch: "Max 8 Students"
+    },
+    pte: {
+      name: "PTE Academic",
+      scores: { beginner: "Score 65+ (CLB 8)", intermediate: "Score 79+ (CLB 9/10)", advanced: "Score 85+ / 90" },
+      baseWeeks: { beginner: 8, intermediate: 5, advanced: 3 },
+      batch: "Max 8 Students"
+    },
+    oet: {
+      name: "OET for Healthcare",
+      scores: { beginner: "Grade C+ / 300 pts", intermediate: "Grade B / 350+ pts", advanced: "Grade A / 400+ pts" },
+      baseWeeks: { beginner: 12, intermediate: 8, advanced: 5 },
+      batch: "Max 6 Doctors/Nurses"
+    },
+    celpip: {
+      name: "CELPIP General",
+      scores: { beginner: "CLB 7 – 8", intermediate: "CLB 9 – 10 (PR Max)", advanced: "CLB 11 – 12" },
+      baseWeeks: { beginner: 8, intermediate: 5, advanced: 3 },
+      batch: "Max 8 Students"
+    },
+    toefl: {
+      name: "TOEFL iBT",
+      scores: { beginner: "Score 90 – 95", intermediate: "Score 105+ / 120", advanced: "Score 115+ / 120" },
+      baseWeeks: { beginner: 10, intermediate: 6, advanced: 4 },
+      batch: "Max 8 Students"
+    },
+    duolingo: {
+      name: "Duolingo English Test",
+      scores: { beginner: "Score 110 – 120", intermediate: "Score 125 – 135+", advanced: "Score 140 – 150" },
+      baseWeeks: { beginner: 6, intermediate: 3, advanced: 2 },
+      batch: "Max 8 Students"
+    },
+    spoken: {
+      name: "Spoken English & Fluency",
+      scores: { beginner: "Conversational Ease", intermediate: "Spontaneous Fluency", advanced: "Executive Presence" },
+      baseWeeks: { beginner: 12, intermediate: 8, advanced: 4 },
+      batch: "Max 8 Students"
+    },
+    interview: {
+      name: "Job & Visa Interview Mastery",
+      scores: { beginner: "Confident Pitch", intermediate: "Job & Visa Offers", advanced: "Executive Negotiation" },
+      baseWeeks: { beginner: 4, intermediate: 3, advanced: 2 },
+      batch: "1-on-1 / Max 4"
+    }
+  };
+
+  function updateRoadmapCalculator() {
+    const examKey = calcExam?.value || "ielts";
+    const levelKey = calcLevelInput?.value || "intermediate";
+    const hours = parseInt(calcHours?.value || "8", 10);
+
+    if (calcHoursLabel) {
+      calcHoursLabel.textContent = `${hours} Hours / Week`;
+    }
+
+    const data = calculatorMatrix[examKey];
+    if (!data) return;
+
+    const projectedScore = data.scores[levelKey];
+    // Scale timeline inversely with study hours
+    const baseWks = data.baseWeeks[levelKey];
+    let computedWeeks = Math.max(2, Math.round(baseWks * (8 / hours)));
+    const timelineStr = `${computedWeeks} Weeks`;
+
+    if (resScore) resScore.textContent = projectedScore;
+    if (resTimeline) resTimeline.textContent = timelineStr;
+    if (resBatch) resBatch.textContent = data.batch;
+  }
+
+  calcExam?.addEventListener("change", updateRoadmapCalculator);
+
+  levelTabBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
+      levelTabBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      const category = btn.getAttribute("data-filter");
+      const level = btn.getAttribute("data-level");
+      if (calcLevelInput) calcLevelInput.value = level;
+      updateRoadmapCalculator();
+    });
+  });
+
+  calcHours?.addEventListener("input", updateRoadmapCalculator);
+
+  calcCtaBtn?.addEventListener("click", () => {
+    const examKey = calcExam?.value || "ielts";
+    const levelKey = calcLevelInput?.value || "intermediate";
+    const hours = calcHours?.value || "8";
+    const score = resScore?.textContent || "";
+    const timeline = resTimeline?.textContent || "";
+    const examName = calculatorMatrix[examKey]?.name || "IELTS Masterclass";
+
+    const msg = encodeURIComponent(
+      `Hello Prof. Avijit Majumdar,\n\nI used your Prep Roadmap Calculator on English Pathshala:\n- Target Course: ${examName}\n- Current Level: ${levelKey.toUpperCase()}\n- Weekly Commitment: ${hours} hrs/week\n- Computed Target: ${score}\n- Recommended Timeline: ${timeline}\n\nI want to lock in this preparation roadmap. Please share batch schedules!`
+    );
+    window.open(`https://wa.me/917003876568?text=${msg}`, "_blank");
+  });
+
+  // Initial calculation
+  updateRoadmapCalculator();
+
+  // 6. Course Filtering
+  const filterTabs = document.querySelectorAll(".filter-tab");
+  const courseCards = document.querySelectorAll(".cyber-card");
+
+  filterTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      filterTabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+      const category = tab.getAttribute("data-filter");
 
       courseCards.forEach((card) => {
         const cardCat = card.getAttribute("data-category");
@@ -111,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 6. Comprehensive Course Repository
+  // 7. Comprehensive Course Data Repository
   const coursesData = {
     ielts: {
       title: "IELTS Masterclass (Band 7.5+)",
@@ -135,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
       duration: "4–6 Weeks",
       batch: "Max 8 Students",
       target: "Score 79+ (CLB 9/10)",
-      desc: "Fast-track training engineered for Pearson's automated scoring algorithm. Master oral fluency heuristics and proven templates.",
+      desc: "Fast-track training engineered for Pearson's automated scoring algorithm. Master oral acoustics and proven scoring templates.",
       modules: [
         "Speaking: Read Aloud pitch calibration, Repeat Sentence memory tricks, and Describe Image templates.",
         "Writing: 100% scoring templates for Summarize Written Text and Write Essay.",
@@ -307,7 +422,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // 7. Modals Manager
+  // 8. Modals Manager (Curriculum & Fast Enquiry)
   const courseModal = document.getElementById("courseModal");
   const enquireModal = document.getElementById("enquireModal");
 
@@ -322,25 +437,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!modalEl) return;
     modalEl.classList.remove("show");
     modalEl.setAttribute("aria-hidden", "true");
-    if (!document.querySelector(".modal.show")) {
+    if (!document.querySelector(".cyber-modal.show")) {
       document.body.style.overflow = "";
     }
   }
 
   document.querySelectorAll("[data-close-modal]").forEach((el) => {
     el.addEventListener("click", () => {
-      const parent = el.closest(".modal");
+      const parent = el.closest(".cyber-modal");
       if (parent) closeModal(parent);
     });
   });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      document.querySelectorAll(".modal.show").forEach(closeModal);
+      document.querySelectorAll(".cyber-modal.show").forEach(closeModal);
     }
   });
 
-  // Modal Elements
   const modalCategoryTag = document.getElementById("modalCategoryTag");
   const modalCourseTitle = document.getElementById("modalCourseTitle");
   const modalCourseDesc = document.getElementById("modalCourseDesc");
@@ -381,15 +495,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Connect modal enquire button
   modalEnquireBtn?.addEventListener("click", () => {
     closeModal(courseModal);
     openEnquireForCourse(activeModalCourseName);
   });
 
-  // Enquire Now Buttons
+  // Fast Enquiry Modal Trigger
   const enquirySelect = document.getElementById("enquiryCourse");
-  const bookingCourseSelect = document.getElementById("contactCourse");
 
   function openEnquireForCourse(courseName) {
     if (enquirySelect && courseName) {
@@ -422,25 +534,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const course = enquirySelect?.value || "IELTS Masterclass";
 
     if (!name || !phone) {
-      showToast("Please fill in your name and phone number.");
+      showToast("Please provide your name and WhatsApp number.");
       return;
     }
 
-    // Save lead
-    saveLead({ name, phone, course, source: "Fast Enquiry Modal" });
+    saveLead({ name, phone, course, source: "Fast Enquiry Cyber Modal" });
 
-    // Open WhatsApp
     const msg = encodeURIComponent(
-      `Hi English Pathshala! My name is ${name} (${phone}). I would like to enquire about the ${course} course.`
+      `Hello English Pathshala! My name is ${name} (${phone}). I would like to enquire about the ${course} program.`
     );
     window.open(`https://wa.me/917003876568?text=${msg}`, "_blank");
 
     closeModal(enquireModal);
     fastEnquiryForm.reset();
-    showToast("Enquiry submitted! Opening WhatsApp...");
+    showToast("Enquiry sent! Opening WhatsApp...");
   });
 
-  // 8. Main Booking Form Validation & Submission
+  // 9. Main Free Consultation Form
   const bookingForm = document.getElementById("bookingForm");
   const nameInput = document.getElementById("contactName");
   const emailInput = document.getElementById("contactEmail");
@@ -452,8 +562,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     let valid = true;
 
-    // Clear previous errors
-    document.querySelectorAll(".form-error").forEach((el) => (el.textContent = ""));
+    document.querySelectorAll(".field-error").forEach((el) => (el.textContent = ""));
 
     const name = nameInput?.value.trim() || "";
     const email = emailInput?.value.trim() || "";
@@ -478,26 +587,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!course) {
-      showFieldError("courseError", "Please select a course.");
+      showFieldError("courseError", "Please select a program.");
       valid = false;
     }
 
     if (!valid) return;
 
-    // Save lead
-    saveLead({ name, email, phone, course, message, source: "Free Demo Consultation Form" });
+    saveLead({ name, email, phone, course, message, source: "Consultation Panel" });
 
-    // Success notification
     showToast("Demo request received! Connecting via WhatsApp...");
 
-    // Format WhatsApp prefill
     const waText = encodeURIComponent(
-      `Hello Prof. Avijit Majumdar / English Pathshala,\n\nI want to book a Free Demo Session.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nCourse: ${course}${
-        message ? `\nMessage: ${message}` : ""
+      `Hello Prof. Avijit Majumdar / English Pathshala,\n\nI want to book a Free Demo Consultation.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nProgram: ${course}${
+        message ? `\nGoal / Exam Date: ${message}` : ""
       }`
     );
 
-    // Redirect to WhatsApp
     setTimeout(() => {
       window.open(`https://wa.me/917003876568?text=${waText}`, "_blank");
     }, 400);
@@ -520,25 +625,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 9. Toast Notifications
+  // 10. Cyber Toast Notification
   const toast = document.getElementById("toast");
   function showToast(text) {
     if (!toast) return;
-    const msgEl = toast.querySelector(".toast-text-msg, .toast-msg");
+    const msgEl = toast.querySelector(".toast-msg");
     if (msgEl) msgEl.textContent = text;
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 4000);
   }
 
-  // 10. FAQ Accordion
-  const faqCards = document.querySelectorAll(".faq-item, .faq-card");
+  // 11. FAQ Accordion
+  const faqCards = document.querySelectorAll(".cyber-faq-card");
   faqCards.forEach((card) => {
-    const btn = card.querySelector(".faq-trigger, .faq-question");
+    const btn = card.querySelector(".faq-btn");
     btn?.addEventListener("click", () => {
       const isOpen = card.classList.contains("open");
       faqCards.forEach((c) => {
         c.classList.remove("open");
-        const qBtn = c.querySelector(".faq-trigger, .faq-question");
+        const qBtn = c.querySelector(".faq-btn");
         if (qBtn) qBtn.setAttribute("aria-expanded", "false");
       });
       if (!isOpen) {
@@ -548,16 +653,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 11. Animated Stats Counter on Viewport Entry
-  const statNumbers = document.querySelectorAll(".dock-num[data-count], .stat-counter[data-count], .stat-num[data-count]");
+  // 12. Animated Stats Counter on Viewport Entry
+  const statNumbers = document.querySelectorAll(".stat-counter[data-count]");
   let statsCounted = false;
 
   function runStatsCounter() {
     if (statsCounted) return;
-    const statsSection = document.querySelector(".stats-dock-section") || document.getElementById("hero");
-    if (!statsSection) return;
+    const mentorSection = document.getElementById("mentor") || document.getElementById("hero");
+    if (!mentorSection) return;
 
-    const rect = statsSection.getBoundingClientRect();
+    const rect = mentorSection.getBoundingClientRect();
     if (rect.top <= window.innerHeight && rect.bottom >= 0) {
       statsCounted = true;
       statNumbers.forEach((el) => {
@@ -565,7 +670,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isNaN(target)) return;
 
         let current = 0;
-        const duration = 1500;
+        const duration = 1400;
         const step = Math.ceil(target / (duration / 25));
 
         const timer = setInterval(() => {
