@@ -222,7 +222,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <div class="eyebrow">LEARNING PATHS</div>
+            <div class="eyebrow"><span class="live-dot-inline">●</span> TARGETED CURRICULUM &amp; CERTIFICATIONS</div>
             <h2>Choose where you want<br>to <span>go next.</span></h2>
           </div>
           <!-- Slider Navigation Controls -->
@@ -230,6 +230,7 @@
             <button class="slider-arrow" id="coursePrev" aria-label="Previous courses" disabled>
               <i data-lucide="chevron-left"></i>
             </button>
+            <div class="slider-dots" id="courseDots" aria-label="Course pagination"></div>
             <div class="slider-page-counter" id="courseCounter">1 / 4</div>
             <button class="slider-arrow" id="courseNext" aria-label="Next courses">
               <i data-lucide="chevron-right"></i>
@@ -238,231 +239,471 @@
         </div>
 
         <div class="filter-row reveal">
-          <button class="filter active" data-filter="all">All courses (12)</button>
-          <button class="filter" data-filter="exam">Global Exams</button>
-          <button class="filter" data-filter="speaking">Speaking & Fluency</button>
-          <button class="filter" data-filter="career">Career & Govt</button>
-          <button class="filter" data-filter="grammar">Grammar</button>
-          <button class="filter" data-filter="academic">Academic & School</button>
+          <button class="filter active" data-filter="all">
+            <i data-lucide="layers"></i>
+            <span>All Courses</span>
+            <span class="filter-count">12</span>
+          </button>
+          <button class="filter" data-filter="exam">
+            <i data-lucide="globe"></i>
+            <span>Global Exams</span>
+            <span class="filter-count">6</span>
+          </button>
+          <button class="filter" data-filter="speaking">
+            <i data-lucide="mic-2"></i>
+            <span>Speaking &amp; Fluency</span>
+            <span class="filter-count">2</span>
+          </button>
+          <button class="filter" data-filter="career">
+            <i data-lucide="briefcase"></i>
+            <span>Career &amp; Govt</span>
+            <span class="filter-count">2</span>
+          </button>
+          <button class="filter" data-filter="grammar">
+            <i data-lucide="sparkles"></i>
+            <span>Grammar</span>
+            <span class="filter-count">1</span>
+          </button>
+          <button class="filter" data-filter="academic">
+            <i data-lucide="graduation-cap"></i>
+            <span>School &amp; Boards</span>
+            <span class="filter-count">1</span>
+          </button>
         </div>
 
         <div class="course-slider-viewport">
           <div class="course-slider-track" id="courseSliderTrack">
-          <!-- 1. IELTS Masterclass -->
-          <article class="course-card featured reveal" data-category="exam">
-            <div class="course-art art-purple">
-              <span class="art-label">MOST POPULAR</span>
-              <div class="art-word">IELTS<br>BAND 7.5+</div>
-              <i data-lucide="award" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Exam Prep</span><span>6–8 weeks</span></div>
-              <h3>IELTS Masterclass (Band 7.5+)</h3>
-              <p>Academic & General Training: Listening, Reading, Task 1 & 2 writing formulas, and 1-on-1 speaking interview clinics.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="ielts" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="IELTS Masterclass" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 1. IELTS Masterclass -->
+            <article class="course-card featured reveal" data-category="exam">
+              <div class="course-card-top theme-purple">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-popular"><i data-lucide="star"></i> MOST POPULAR</span>
+                  <span class="course-cat-tag">EXAM PREP</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-purple">
+                    <i data-lucide="award"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Band 7.5 – 8.5+</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">IELTS Masterclass</h3>
+                <p class="course-desc">Academic &amp; General Training: Listening decoding, Reading speed heuristics, Task 1 &amp; 2 band 8+ formulas, and 1-on-1 interview clinics.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>1-on-1 speaking clinics with former examiners</span></li>
+                  <li><i data-lucide="check"></i><span>Band 8.0+ Task 1 &amp; 2 lexical writing frameworks</span></li>
+                  <li><i data-lucide="check"></i><span>Official Cambridge &amp; IDP mock diagnostic reports</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>6–8 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="ielts" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="IELTS Masterclass (Band 7.5+)" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 2. PTE Academic -->
-          <article class="course-card reveal delay-1" data-category="exam">
-            <div class="course-art art-cyan">
-              <span class="art-label">AI PREP</span>
-              <div class="art-word">PTE<br>ACADEMIC<br>79+</div>
-              <i data-lucide="cpu" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Exam Prep</span><span>4–6 weeks</span></div>
-              <h3>PTE Academic Fast-Track</h3>
-              <p>AI-powered prep with rapid 48-hour results. Master Read Aloud, Describe Image, and Write From Dictation shortcuts.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="pte" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="PTE Academic" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 2. PTE Academic Fast-Track -->
+            <article class="course-card reveal delay-1" data-category="exam">
+              <div class="course-card-top theme-cyan">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-cyan"><i data-lucide="cpu"></i> AI SCORING PREP</span>
+                  <span class="course-cat-tag">EXAM PREP</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-cyan">
+                    <i data-lucide="cpu"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Score 79+ (CLB 9/10)</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">PTE Academic Fast-Track</h3>
+                <p class="course-desc">Targeted algorithm coaching for Pearson's automated scoring engine. Master oral fluency, pitch calibration, and high-frequency question banks.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Pearson algorithm speech &amp; oral fluency calibration</span></li>
+                  <li><i data-lucide="check"></i><span>100% scoring templates for Describe Image &amp; Essay</span></li>
+                  <li><i data-lucide="check"></i><span>High-frequency Write From Dictation test banks</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>4–6 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="pte" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="PTE Academic Fast-Track" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 3. OET for Healthcare -->
-          <article class="course-card reveal delay-2" data-category="exam">
-            <div class="course-art art-emerald">
-              <span class="art-label">HEALTHCARE</span>
-              <div class="art-word">OET<br>DOCTORS &<br>NURSES</div>
-              <i data-lucide="activity" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Exam Prep</span><span>8–10 weeks</span></div>
-              <h3>OET for Healthcare</h3>
-              <p>Tailored for doctors and nurses targeting UK NHS, Ireland, and Australia registration. Referral letters and clinical roleplays.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="oet" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="OET for Healthcare" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 3. OET for Healthcare -->
+            <article class="course-card reveal delay-2" data-category="exam">
+              <div class="course-card-top theme-emerald">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-emerald"><i data-lucide="activity"></i> NHS &amp; AHPRA</span>
+                  <span class="course-cat-tag">HEALTHCARE</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-emerald">
+                    <i data-lucide="activity"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Grade B / 350+ Points</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">OET for Healthcare</h3>
+                <p class="course-desc">Dedicated clinical English for Doctors, Nurses, and Pharmacists targeting UK NHS, NMC, GMC, and Australia/Ireland professional registration.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Clinical referral letters &amp; case notes prioritization</span></li>
+                  <li><i data-lucide="check"></i><span>Empathetic patient consultations &amp; roleplay mastery</span></li>
+                  <li><i data-lucide="check"></i><span>Evaluated by certified medical English trainers</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>8–10 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 6 Doctors/Nurses</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="oet" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="OET for Healthcare" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 4. CELPIP Canada PR -->
-          <article class="course-card reveal" data-category="exam">
-            <div class="course-art art-red">
-              <span class="art-label">CANADA PR</span>
-              <div class="art-word">CELPIP<br>CANADA<br>PR</div>
-              <i data-lucide="map-pin" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Exam Prep</span><span>4–6 weeks</span></div>
-              <h3>CELPIP General (Canada PR)</h3>
-              <p>The 100% Canadian English exam preferred for IRCC Express Entry. Computer-delivered mock tests with instant score analysis.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="celpip" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="CELPIP General" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 4. CELPIP Canada PR -->
+            <article class="course-card reveal" data-category="exam">
+              <div class="course-card-top theme-red">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-red"><i data-lucide="map-pin"></i> CANADA EXPRESS ENTRY</span>
+                  <span class="course-cat-tag">IMMIGRATION</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-red">
+                    <i data-lucide="map-pin"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">CLB 9 – 12 Score</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">CELPIP General (Canada PR)</h3>
+                <p class="course-desc">Master 100% Canadian English exam preferred by IRCC for Express Entry. Computer-delivered mock tests with instant score analysis and culture nuances.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Canadian English expressions &amp; workplace norms</span></li>
+                  <li><i data-lucide="check"></i><span>Workplace survey response &amp; email structures</span></li>
+                  <li><i data-lucide="check"></i><span>Full computer-delivered mock test simulations</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>4–6 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="celpip" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="CELPIP General (Canada PR)" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 5. TOEFL iBT -->
-          <article class="course-card reveal delay-1" data-category="exam">
-            <div class="course-art art-indigo">
-              <span class="art-label">US ADMISSIONS</span>
-              <div class="art-word">TOEFL<br>IBT<br>105+</div>
-              <i data-lucide="globe" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Exam Prep</span><span>6–8 weeks</span></div>
-              <h3>TOEFL iBT University Prep</h3>
-              <p>Specialized training for USA, Germany, and top global university admissions. Integrated essay writing and academic lecture notes.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="toefl" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="TOEFL iBT" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 5. TOEFL iBT -->
+            <article class="course-card reveal delay-1" data-category="exam">
+              <div class="course-card-top theme-indigo">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-indigo"><i data-lucide="globe"></i> US &amp; GLOBAL ADMISSIONS</span>
+                  <span class="course-cat-tag">ACADEMIC</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-indigo">
+                    <i data-lucide="globe"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Score 105+ / 120</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">TOEFL iBT University Prep</h3>
+                <p class="course-desc">Rigorous academic training for US, German, and top global university admissions. Master academic discussion tasks and campus lecture synthesis.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>New 'Writing for Academic Discussion' mastery</span></li>
+                  <li><i data-lucide="check"></i><span>Integrated speaking &amp; campus lecture note-taking</span></li>
+                  <li><i data-lucide="check"></i><span>Official ETS-style timed mock evaluations</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>6–8 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="toefl" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="TOEFL iBT University Prep" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 6. Duolingo English Test -->
-          <article class="course-card reveal delay-2" data-category="exam">
-            <div class="course-art art-lime">
-              <span class="art-label dark">FAST CERT</span>
-              <div class="art-word dark-text">DUOLINGO<br>DET<br>120+</div>
-              <i data-lucide="zap" class="art-icon dark-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Exam Prep</span><span>2–4 weeks</span></div>
-              <h3>Duolingo English Test (DET)</h3>
-              <p>Quick, affordable certification accepted by 4,000+ universities. Adaptive question strategies and video interview preparation.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="duolingo" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Duolingo English Test" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 6. Duolingo English Test -->
+            <article class="course-card reveal delay-2" data-category="exam">
+              <div class="course-card-top theme-lime">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-lime"><i data-lucide="zap"></i> 4,000+ UNIVERSITIES</span>
+                  <span class="course-cat-tag">FAST TRACK</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-lime">
+                    <i data-lucide="zap"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Score 120 – 140+</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">Duolingo English Test (DET)</h3>
+                <p class="course-desc">Quick, affordable 1-hour certification accepted worldwide. Computer-adaptive tactics, unscripted video interviews, and speed typing clinics.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Computer-adaptive algorithm weights &amp; tactics</span></li>
+                  <li><i data-lucide="check"></i><span>Unscripted video interview admissions coaching</span></li>
+                  <li><i data-lucide="check"></i><span>Literacy &amp; production speed drills with analytics</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>2–4 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="duolingo" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Duolingo English Test (DET)" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 7. Speak With Confidence -->
-          <article class="course-card featured reveal" data-category="speaking">
-            <div class="course-art art-purple">
-              <span class="art-label">FLUENCY</span>
-              <div class="art-word">SPEAK<br>WITH<br>CONFIDENCE</div>
-              <i data-lucide="mic-2" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Speaking</span><span>8–12 weeks</span></div>
-              <h3>Spoken English & Fluency</h3>
-              <p>Move from translating in your head to speaking naturally. 70% active talking time in small batches of max 8 students.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="spoken" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Spoken English" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 7. Speak With Confidence -->
+            <article class="course-card featured reveal" data-category="speaking">
+              <div class="course-card-top theme-purple">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-popular"><i data-lucide="mic-2"></i> 70% ACTIVE TALKING</span>
+                  <span class="course-cat-tag">FLUENCY</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-purple">
+                    <i data-lucide="mic-2"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Natural Spontaneous Speech</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">Spoken English &amp; Fluency</h3>
+                <p class="course-desc">Break free from translating in your head. Achieve effortless, instinctive speech with 70% active speaking time in small interactive batches.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Overcome hesitation &amp; fear of public speaking</span></li>
+                  <li><i data-lucide="check"></i><span>MTI &amp; accent neutralization speech drills</span></li>
+                  <li><i data-lucide="check"></i><span>Extempore debates, storytelling &amp; conversation clubs</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>8–12 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="spoken" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Spoken English &amp; Fluency" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 8. Everyday English -->
-          <article class="course-card reveal delay-1" data-category="speaking">
-            <div class="course-art art-green">
-              <span class="art-label">DAILY</span>
-              <div class="art-word">EVERYDAY<br>ENGLISH</div>
-              <i data-lucide="messages-square" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Speaking</span><span>6–8 weeks</span></div>
-              <h3>Everyday English</h3>
-              <p>Useful phrases, idioms, and natural conversation patterns for daily social interactions, travel, and conversations.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="everyday" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Everyday English" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 8. Everyday English -->
+            <article class="course-card reveal delay-1" data-category="speaking">
+              <div class="course-card-top theme-green">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-green"><i data-lucide="messages-square"></i> SOCIAL &amp; TRAVEL</span>
+                  <span class="course-cat-tag">PRACTICAL</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-green">
+                    <i data-lucide="messages-square"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Social Conversational Ease</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">Everyday English</h3>
+                <p class="course-desc">Practical conversation patterns, idioms, and vocabulary for daily life, overseas travel, restaurant dining, banking, and casual social gatherings.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Modern idioms &amp; phrasal verbs used by native speakers</span></li>
+                  <li><i data-lucide="check"></i><span>Airport, hotel, dining &amp; small-talk roleplaying games</span></li>
+                  <li><i data-lucide="check"></i><span>Digital messaging &amp; phone call etiquette training</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>6–8 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="everyday" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Everyday English" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 9. English for Work & Interviews -->
-          <article class="course-card reveal delay-2" data-category="career">
-            <div class="course-art art-yellow">
-              <span class="art-label dark">CAREER</span>
-              <div class="art-word dark-text">ENGLISH<br>FOR<br>WORK</div>
-              <i data-lucide="briefcase-business" class="art-icon dark-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Career</span><span>2–4 weeks</span></div>
-              <h3>Job & Visa Interview Mastery</h3>
-              <p>Master the STAR method, answer tricky behavioral questions with impact, handle salary negotiations, and ace visa rounds.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="interview" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Interview Mastery" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 9. English for Work & Interviews -->
+            <article class="course-card reveal delay-2" data-category="career">
+              <div class="course-card-top theme-yellow">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-yellow"><i data-lucide="briefcase"></i> CAREER ACCELERATOR</span>
+                  <span class="course-cat-tag">CORPORATE</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-yellow">
+                    <i data-lucide="briefcase"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Offers &amp; Visa Approvals</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">Job &amp; Visa Interview Mastery</h3>
+                <p class="course-desc">Executive preparation for corporate job interviews, salary negotiations, promotion pitches, and US/UK/Canada visa officer interview rounds.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>STAR framework for behavioral &amp; leadership questions</span></li>
+                  <li><i data-lucide="check"></i><span>90-second high-impact professional power pitch</span></li>
+                  <li><i data-lucide="check"></i><span>Embassy visa interview simulations with body language review</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>2–4 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>1-on-1 / Max 4</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="interview" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Job &amp; Visa Interview Mastery" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 10. Govt. Exams English -->
-          <article class="course-card reveal" data-category="career">
-            <div class="course-art art-orange">
-              <span class="art-label">COMPETITIVE</span>
-              <div class="art-word">GOVT<br>EXAMS<br>ENGLISH</div>
-              <i data-lucide="file-text" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Competitive</span><span>8–12 weeks</span></div>
-              <h3>Govt. Exams (SSC, Bank, Railways)</h3>
-              <p>Error detection formulas, reading comprehension speed shortcuts, cloze tests, and TCS examination pattern practice banks.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="govt" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Govt. Exams (SSC, Bank, Railways)" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 10. Govt. Exams English -->
+            <article class="course-card reveal" data-category="career">
+              <div class="course-card-top theme-orange">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-orange"><i data-lucide="file-text"></i> SSC • BANK • RAILWAYS</span>
+                  <span class="course-cat-tag">GOVT EXAMS</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-orange">
+                    <i data-lucide="file-text"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">Top Percentile Rank</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">Govt. Exams (SSC, Bank, Railways)</h3>
+                <p class="course-desc">Speed-cracking formulas for SSC CGL/CHSL, IBPS PO/Clerk, SBI, and State PSCs with time-saving elimination methods and previous papers.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>100 golden rules of spotting errors &amp; sentence syntax</span></li>
+                  <li><i data-lucide="check"></i><span>Cloze test &amp; para jumbles elimination in under 90s</span></li>
+                  <li><i data-lucide="check"></i><span>5,000+ TCS pattern question bank drills &amp; mocks</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>8–12 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 12 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="govt" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Govt. Exams (SSC, Bank, Railways)" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 11. Grammar Made Easy -->
-          <article class="course-card reveal delay-1" data-category="grammar">
-            <div class="course-art art-blue">
-              <span class="art-label">FOUNDATION</span>
-              <div class="art-word">GRAMMAR<br>MADE<br>EASY</div>
-              <i data-lucide="puzzle" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>Grammar</span><span>6–8 weeks</span></div>
-              <h3>Grammar Made Easy</h3>
-              <p>Understand the rules through intuitive context and real-world examples without rote memorization. Tenses, prepositions, and syntax.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="grammar" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Grammar Made Easy" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 11. Grammar Made Easy -->
+            <article class="course-card reveal delay-1" data-category="grammar">
+              <div class="course-card-top theme-blue">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-blue"><i data-lucide="sparkles"></i> ZERO ROTE LEARNING</span>
+                  <span class="course-cat-tag">FOUNDATIONS</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-blue">
+                    <i data-lucide="sparkles"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">100% Error-Free Writing</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">Grammar Made Easy</h3>
+                <p class="course-desc">Master the structure of English intuitively without tedious memorization. Understand tenses, prepositions, and syntax through context.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Timeline-based 12-tense visual matrix demystified</span></li>
+                  <li><i data-lucide="check"></i><span>Prepositions &amp; articles without guesswork</span></li>
+                  <li><i data-lucide="check"></i><span>Real-time error spotting clinics for Indian English</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>6–8 Weeks</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 8 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="grammar" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="Grammar Made Easy" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
 
-          <!-- 12. Board Exam & English Olympiad -->
-          <article class="course-card reveal delay-2" data-category="academic">
-            <div class="course-art art-teal">
-              <span class="art-label">ACADEMIC</span>
-              <div class="art-word">BOARD &<br>OLYMPIAD</div>
-              <i data-lucide="book-open" class="art-icon"></i>
-            </div>
-            <div class="course-body">
-              <div class="course-meta"><span>School</span><span>Academic Year</span></div>
-              <h3>CBSE/ICSE Board & Olympiad</h3>
-              <p>Class IX–XII literature, character sketches, creative writing formats, and high-order linguistic reasoning for SOF Olympiads.</p>
-              <div class="course-actions">
-                <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="board" type="button">Learn More <i data-lucide="info"></i></button>
-                <button class="btn btn-primary btn-sm btn-enquire" data-enquire="CBSE/ICSE Board & Olympiad" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+            <!-- 12. Board Exam & English Olympiad -->
+            <article class="course-card reveal delay-2" data-category="academic">
+              <div class="course-card-top theme-teal">
+                <div class="course-badge-row">
+                  <span class="badge-pill badge-teal"><i data-lucide="book-open"></i> 95%+ BOARD SCORES</span>
+                  <span class="course-cat-tag">SCHOOL &amp; OLYMPIAD</span>
+                </div>
+                <div class="course-header-main">
+                  <div class="course-icon-badge art-teal">
+                    <i data-lucide="book-open"></i>
+                  </div>
+                  <div class="course-target-box">
+                    <span class="target-caption">TARGET OUTCOME</span>
+                    <strong class="target-score">95%+ Board &amp; Top Olympiad</strong>
+                  </div>
+                </div>
               </div>
-            </div>
-          </article>
+              <div class="course-body">
+                <h3 class="course-title">CBSE/ICSE Board &amp; Olympiad</h3>
+                <p class="course-desc">Specialized academic curriculum for Class IX–XII literature, character sketches, creative writing formats, and high-order Olympiad reasoning.</p>
+                <ul class="course-features">
+                  <li><i data-lucide="check"></i><span>Deep literature analysis, character sketches &amp; motifs</span></li>
+                  <li><i data-lucide="check"></i><span>SOF &amp; SilverZone verbal reasoning &amp; analogies</span></li>
+                  <li><i data-lucide="check"></i><span>Past 10 years' board paper solutions &amp; model keys</span></li>
+                </ul>
+                <div class="course-specs">
+                  <div class="spec-item"><i data-lucide="clock"></i><span>Academic Year</span></div>
+                  <div class="spec-item"><i data-lucide="users"></i><span>Max 10 Students</span></div>
+                </div>
+                <div class="course-actions">
+                  <button class="btn btn-outline btn-sm btn-learn-more" data-learn-more="board" type="button">Curriculum <i data-lucide="info"></i></button>
+                  <button class="btn btn-primary btn-sm btn-enquire" data-enquire="CBSE/ICSE Board &amp; Olympiad" type="button">Enquire Now <i data-lucide="arrow-right"></i></button>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
