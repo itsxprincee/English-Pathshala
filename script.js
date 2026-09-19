@@ -727,6 +727,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Helper to persist lead locally so no inquiry is ever lost
+  function saveLead(leadData) {
+    try {
+      const existing = JSON.parse(localStorage.getItem("ep_leads") || "[]");
+      existing.push({ ...leadData, timestamp: new Date().toISOString() });
+      localStorage.setItem("ep_leads", JSON.stringify(existing));
+    } catch (err) {
+      console.warn("Could not cache lead locally", err);
+    }
+  }
+
+  // Helper to trigger WhatsApp handover without popup-blocker restrictions
+  function triggerWhatsApp(url) {
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   // 11. Enquiry Form Submission
   const enquiryForm = document.getElementById("enquiryForm");
   enquiryForm?.addEventListener("submit", (e) => {
@@ -743,23 +765,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const course = document.getElementById("enquiryCourse")?.value || "English Course";
     const mode = document.getElementById("enquireMode")?.value || "Online Live Batch";
 
+    saveLead({ type: "enquiry", name, phone, course, mode });
+
+    const msg = encodeURIComponent(
+      `Hello English Pathshala! My name is ${name}. I have submitted an enquiry for ${course} (${mode}). My WhatsApp/Phone is ${phone}. Please connect with me.`
+    );
+    const waUrl = `https://wa.me/917003876568?text=${msg}`;
+
     setTimeout(() => {
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = origBtnHtml;
       }
       closeModal(enquireModal);
-      showToast(`Thank you, ${name}! Your enquiry for ${course} has been submitted.`);
+      showToast(`Thank you, ${name}! Your enquiry for ${course} is saved.`);
       enquiryForm.reset();
 
-      // Instant WhatsApp Handover
-      setTimeout(() => {
-        const msg = encodeURIComponent(
-          `Hello English Pathshala! My name is ${name}. I have submitted an enquiry for ${course} (${mode}). My WhatsApp/Phone is ${phone}. Please connect with me.`
-        );
-        window.open(`https://wa.me/917003876568?text=${msg}`, "_blank");
-      }, 800);
-    }, 600);
+      // Reliable WhatsApp Handover
+      triggerWhatsApp(waUrl);
+    }, 400);
   });
 
   // 12. Contact Form (Book Your Free Demo) Submission
@@ -779,21 +803,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const course = document.getElementById("contactCourse")?.value || "Course";
     const message = document.getElementById("contactMessage")?.value || "";
 
+    saveLead({ type: "demo_contact", name, email, phone, course, message });
+
+    let text = `Hello English Pathshala! My name is ${name}. I would like to book a free demo for ${course}. My Email is ${email} and Phone is ${phone}.`;
+    if (message) text += ` Message: ${message}`;
+    const waUrl = `https://wa.me/917003876568?text=${encodeURIComponent(text)}`;
+
     setTimeout(() => {
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = origBtnHtml;
       }
-      showToast(`Thank you, ${name}! Your free demo request for ${course} has been sent.`);
+      showToast(`Thank you, ${name}! Your demo request for ${course} is saved.`);
       contactForm.reset();
 
-      // Instant WhatsApp Handover
-      setTimeout(() => {
-        let text = `Hello English Pathshala! My name is ${name}. I would like to book a free demo for ${course}. My Email is ${email} and Phone is ${phone}.`;
-        if (message) text += ` Message: ${message}`;
-        window.open(`https://wa.me/917003876568?text=${encodeURIComponent(text)}`, "_blank");
-      }, 800);
-    }, 600);
+      // Reliable WhatsApp Handover
+      triggerWhatsApp(waUrl);
+    }, 400);
   });
 
   // 13. Hero Audio Play Button Animation & Pronunciation Sample
