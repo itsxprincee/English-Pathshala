@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 5. Course Filtering
-  const filterBtns = document.querySelectorAll(".filter-btn");
+  const filterBtns = document.querySelectorAll(".filter-tab, .filter-btn");
   const courseCards = document.querySelectorAll(".course-card");
 
   filterBtns.forEach((btn) => {
@@ -524,21 +524,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const toast = document.getElementById("toast");
   function showToast(text) {
     if (!toast) return;
-    const msgEl = toast.querySelector(".toast-msg");
+    const msgEl = toast.querySelector(".toast-text-msg, .toast-msg");
     if (msgEl) msgEl.textContent = text;
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 4000);
   }
 
   // 10. FAQ Accordion
-  const faqCards = document.querySelectorAll(".faq-card");
+  const faqCards = document.querySelectorAll(".faq-item, .faq-card");
   faqCards.forEach((card) => {
-    const btn = card.querySelector(".faq-question");
+    const btn = card.querySelector(".faq-trigger, .faq-question");
     btn?.addEventListener("click", () => {
       const isOpen = card.classList.contains("open");
       faqCards.forEach((c) => {
         c.classList.remove("open");
-        c.querySelector(".faq-question")?.setAttribute("aria-expanded", "false");
+        const qBtn = c.querySelector(".faq-trigger, .faq-question");
+        if (qBtn) qBtn.setAttribute("aria-expanded", "false");
       });
       if (!isOpen) {
         card.classList.add("open");
@@ -548,15 +549,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 11. Animated Stats Counter on Viewport Entry
-  const statNumbers = document.querySelectorAll(".stat-num[data-count]");
+  const statNumbers = document.querySelectorAll(".dock-num[data-count], .stat-counter[data-count], .stat-num[data-count]");
   let statsCounted = false;
 
   function runStatsCounter() {
     if (statsCounted) return;
-    const heroSection = document.getElementById("hero");
-    if (!heroSection) return;
+    const statsSection = document.querySelector(".stats-dock-section") || document.getElementById("hero");
+    if (!statsSection) return;
 
-    const rect = heroSection.getBoundingClientRect();
+    const rect = statsSection.getBoundingClientRect();
     if (rect.top <= window.innerHeight && rect.bottom >= 0) {
       statsCounted = true;
       statNumbers.forEach((el) => {
