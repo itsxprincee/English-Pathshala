@@ -1,6 +1,6 @@
 /* =========================================================
    ENGLISH PATHSHALA — JAVASCRIPT
-   SaaS Interactions, Real-Time Filter, Lead Capture
+   SaaS Interactive Hub, Score Calculator, Single Form & Modals
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,12 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Close when clicking any nav link
     mobileMenu.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => closeMobileMenu());
     });
 
-    // Close on outside click
     document.addEventListener("click", (e) => {
       if (mobileMenu.classList.contains("open") && !mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
         closeMobileMenu();
@@ -53,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =======================================================
-     2. UNIVERSAL MODAL SYSTEM
+     2. UNIVERSAL MODAL CONTROLLER
      ======================================================= */
   function openModal(modalId) {
     const modalEl = document.getElementById(modalId);
@@ -74,14 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Handle all modal close triggers
   document.querySelectorAll(".modal").forEach(modal => {
     modal.querySelectorAll("[data-modal-close], .modal-close").forEach(btn => {
       btn.addEventListener("click", () => closeModal(modal));
     });
   });
 
-  // Close active modal on Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       document.querySelectorAll(".modal.active").forEach(m => closeModal(m));
@@ -89,7 +85,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =======================================================
-     3. INTERACTIVE TARGET SCORE PLANNER
+     3. MASTER INTERACTIVE EXAM HUB TABS
+     ======================================================= */
+  const hubTabs = [
+    { btn: document.getElementById("tabProgramsBtn"), view: document.getElementById("viewPrograms"), id: "programs" },
+    { btn: document.getElementById("tabPlannerBtn"), view: document.getElementById("viewPlanner"), id: "planner" },
+    { btn: document.getElementById("tabCompareBtn"), view: document.getElementById("viewCompare"), id: "compare" }
+  ];
+
+  function switchHubTab(targetId) {
+    hubTabs.forEach(item => {
+      if (!item.btn || !item.view) return;
+      const isActive = item.id === targetId;
+      item.btn.classList.toggle("active", isActive);
+      item.btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      item.view.classList.toggle("active", isActive);
+    });
+  }
+
+  hubTabs.forEach(item => {
+    if (item.btn) {
+      item.btn.addEventListener("click", () => switchHubTab(item.id));
+    }
+  });
+
+  // Handle external links targeting a specific hub tab (e.g. from nav or hero)
+  document.querySelectorAll("[data-hub-target]").forEach(link => {
+    link.addEventListener("click", (e) => {
+      const target = link.dataset.hubTarget;
+      if (target) {
+        switchHubTab(target);
+      }
+    });
+  });
+
+  /* =======================================================
+     4. INTERACTIVE TARGET SCORE PLANNER
      ======================================================= */
   const planExamBtns = document.querySelectorAll(".plan-exam-btn");
   const plannerScoresContainer = document.getElementById("plannerScores");
@@ -120,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "OET Healthcare",
       scores: [
         { label: "Grade B (350+)", duration: "4 - 6 Weeks", mocks: "8 Clinical Case Letters", batch: "Late Evening Batch (9:00 PM)" },
-        { label: "Grade A (450+)", duration: "6 - 8 Weeks", mocks: "12 Clinical Consultations", batch: "Weekend Intensive (Shift-friendly)" }
+        { label: "Grade A (450+)", duration: "6 - 8 Weeks", mocks: "12 Clinical Consultations", batch: "Shift-Friendly Weekend Batch" }
       ]
     },
     celpip: {
@@ -149,16 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (outBatch) outBatch.textContent = activeScore.batch;
 
     if (plannerCTA) {
-      plannerCTA.onclick = (e) => {
-        const courseSelect = document.getElementById("course");
-        if (courseSelect) {
-          for (let i = 0; i < courseSelect.options.length; i++) {
-            if (courseSelect.options[i].value.toLowerCase().includes(data.name.split(" ")[0].toLowerCase())) {
-              courseSelect.selectedIndex = i;
-              break;
-            }
-          }
-        }
+      plannerCTA.onclick = () => {
+        selectCourseInForm(data.name);
       };
     }
   }
@@ -201,43 +224,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Initial render of Score Planner
   if (plannerScoresContainer) {
     renderScoreButtons();
   }
 
   /* =======================================================
-     4. SAAS INTERACTIVE COURSE FILTER TABS
+     5. COURSE SELECTION HELPER
      ======================================================= */
-  const filterTabs = document.querySelectorAll(".filter-tab");
-  const courseCards = document.querySelectorAll(".course-card");
+  function selectCourseInForm(courseName) {
+    const userCourseSelect = document.getElementById("userCourse");
+    if (!userCourseSelect || !courseName) return;
 
-  filterTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      const filter = tab.dataset.filter || "all";
+    const lower = courseName.toLowerCase();
+    for (let i = 0; i < userCourseSelect.options.length; i++) {
+      const optVal = userCourseSelect.options[i].value.toLowerCase();
+      if (optVal && (optVal.includes(lower) || lower.includes(optVal.split(" ")[0]))) {
+        userCourseSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
 
-      // Update active tab state
-      filterTabs.forEach(t => {
-        t.classList.remove("active");
-        t.setAttribute("aria-selected", "false");
-      });
-      tab.classList.add("active");
-      tab.setAttribute("aria-selected", "true");
-
-      // Filter course cards
-      courseCards.forEach(card => {
-        const categories = (card.dataset.category || "").split(" ");
-        if (filter === "all" || categories.includes(filter)) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
+  // Pre-fill course when clicking "Book Demo" on a course card
+  document.querySelectorAll(".enroll-link").forEach(link => {
+    link.addEventListener("click", () => {
+      const courseFill = link.dataset.courseFill;
+      if (courseFill) {
+        selectCourseInForm(courseFill);
+      }
     });
   });
 
   /* =======================================================
-     5. COURSE DETAILS MODAL
+     6. COURSE DETAILS MODAL
      ======================================================= */
   const modalCourseTitle = document.getElementById("modalCourseTitle");
   const modalDuration = document.getElementById("modalDuration");
@@ -284,21 +303,14 @@ document.addEventListener("DOMContentLoaded", () => {
     modalCTA.addEventListener("click", () => {
       const currentCourse = modalCourseTitle ? modalCourseTitle.textContent.replace(" Preparation", "") : "";
       closeModal(document.getElementById("courseModal"));
-
-      const courseSelect = document.getElementById("course");
-      if (courseSelect && currentCourse) {
-        for (let i = 0; i < courseSelect.options.length; i++) {
-          if (courseSelect.options[i].value.toLowerCase().includes(currentCourse.toLowerCase())) {
-            courseSelect.selectedIndex = i;
-            break;
-          }
-        }
+      if (currentCourse) {
+        selectCourseInForm(currentCourse);
       }
     });
   }
 
   /* =======================================================
-     6. FAQ ACCORDION (SMOOTH CSS ROTATION)
+     7. FAQ ACCORDION
      ======================================================= */
   const faqItems = document.querySelectorAll(".faq-item");
 
@@ -309,7 +321,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       const isOpen = item.classList.contains("open");
 
-      // Close all other items
       faqItems.forEach(other => {
         if (other !== item) {
           other.classList.remove("open");
@@ -318,7 +329,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Toggle current item
       if (isOpen) {
         item.classList.remove("open");
         btn.setAttribute("aria-expanded", "false");
@@ -330,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =======================================================
-     7. LEGAL MODALS (Privacy & Terms)
+     8. LEGAL MODALS (Privacy & Terms)
      ======================================================= */
   const openPrivacyBtn = document.getElementById("openPrivacyBtn");
   if (openPrivacyBtn) {
@@ -343,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =======================================================
-     8. FORM HANDLERS (HERO & CONTACT FORMS)
+     9. UNIFIED DEMO BOOKING FORM
      ======================================================= */
   function saveLeadToStorage(data) {
     try {
@@ -354,35 +364,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       localStorage.setItem("ep_leads", JSON.stringify(stored));
     } catch (e) {
-      // Storage fallback
+      // LocalStorage fallback
     }
   }
 
-  function submitDemoLead(leadData, formattedMessage) {
-    saveLeadToStorage(leadData);
-
-    const waURL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(formattedMessage)}`;
-
-    const successWALink = document.getElementById("successWALink");
-    if (successWALink) {
-      successWALink.href = waURL;
-    }
-
-    openModal("successModal");
-    window.open(waURL, "_blank", "noopener,noreferrer");
-  }
-
-  // Hero Quick Demo Form
-  const heroDemoForm = document.getElementById("heroDemoForm");
-  if (heroDemoForm) {
-    heroDemoForm.addEventListener("submit", (e) => {
+  const unifiedDemoForm = document.getElementById("unifiedDemoForm");
+  if (unifiedDemoForm) {
+    unifiedDemoForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const name = document.getElementById("heroName")?.value.trim() || "";
-      const phone = document.getElementById("heroPhone")?.value.trim() || "";
-      const course = document.getElementById("heroCourse")?.value || "";
-      const slot = document.getElementById("heroSlot")?.value || "Flexible";
-      const goal = document.getElementById("heroGoal")?.value.trim() || "Not specified";
+      const name = document.getElementById("userName")?.value.trim() || "";
+      const phone = document.getElementById("userPhone")?.value.trim() || "";
+      const course = document.getElementById("userCourse")?.value || "";
+      const slot = document.getElementById("userSlot")?.value || "Flexible";
+      const goal = document.getElementById("userGoal")?.value.trim() || "Not specified";
 
       if (name.length < 2) {
         alert("Please enter your full name.");
@@ -399,6 +394,9 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Please select your target exam.");
         return;
       }
+
+      const leadData = { name, phone, course, slot, goal, source: "clean_saas_form" };
+      saveLeadToStorage(leadData);
 
       const message = `Hello English Pathshala,
 I would like to book a Free Demo Consultation.
@@ -411,76 +409,18 @@ I would like to book a Free Demo Consultation.
 
 Please share available batch timings and confirm my demo with Prof. Avijit Majumdar. Thank you!`;
 
-      submitDemoLead({ name, phone, course, slot, goal, source: "hero_form" }, message);
-      heroDemoForm.reset();
+      const waURL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+
+      const successWALink = document.getElementById("successWALink");
+      if (successWALink) {
+        successWALink.href = waURL;
+      }
+
+      openModal("successModal");
+      window.open(waURL, "_blank", "noopener,noreferrer");
+
+      unifiedDemoForm.reset();
     });
   }
-
-  // Bottom Contact Form
-  const demoForm = document.getElementById("demoForm");
-  if (demoForm) {
-    demoForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById("name")?.value.trim() || "";
-      const phone = document.getElementById("phone")?.value.trim() || "";
-      const course = document.getElementById("course")?.value || "";
-      const goal = document.getElementById("goal")?.value.trim() || "Not specified";
-
-      if (name.length < 2) {
-        alert("Please enter your full name.");
-        return;
-      }
-
-      const cleanDigits = phone.replace(/\D/g, "");
-      if (cleanDigits.length < 7 || cleanDigits.length > 15) {
-        alert("Please enter a valid phone or WhatsApp number.");
-        return;
-      }
-
-      if (!course) {
-        alert("Please select your target exam.");
-        return;
-      }
-
-      const message = `Hello English Pathshala,
-I would like to schedule a Free Demo Session.
-
-• Name: ${name}
-• WhatsApp: ${phone}
-• Target Exam: ${course}
-• Target Goal / Timeline: ${goal}
-
-Please connect with me for batch timings. Thank you!`;
-
-      submitDemoLead({ name, phone, course, goal, source: "contact_form" }, message);
-      demoForm.reset();
-    });
-  }
-
-  /* =======================================================
-     9. ACTIVE NAV SCROLL SPY
-     ======================================================= */
-  const sections = document.querySelectorAll("main section[id]");
-  const navLinks = document.querySelectorAll(".nav-menu .nav-link");
-
-  function updateActiveNav() {
-    const scrollPosition = window.scrollY + 120;
-
-    sections.forEach(sec => {
-      const top = sec.offsetTop;
-      const height = sec.offsetHeight;
-      const id = sec.getAttribute("id");
-
-      if (scrollPosition >= top && scrollPosition < top + height) {
-        navLinks.forEach(link => {
-          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-        });
-      }
-    });
-  }
-
-  window.addEventListener("scroll", updateActiveNav, { passive: true });
-  updateActiveNav();
 
 });
