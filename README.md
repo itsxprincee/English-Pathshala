@@ -1,26 +1,37 @@
-# English Pathshala — Premium Redesign V2
+# English Pathshala — Official Website & Test Preparation Platform
 
-Built as a plain HTML/CSS/JavaScript front-end so it can be delivered or integrated into an existing project.
+A high-converting, modern EdTech SaaS landing page and test preparation portal for **English Pathshala**, mentored by Cambridge CELTA certified **Prof. Avijit Majumdar**.
 
-## Included
-- Premium responsive homepage
-- Modern hero/dashboard visual without external stock-image dependency
-- Course cards for IELTS, PTE, OET, CELPIP, TOEFL and Duolingo
-- Mentor section
-- Stats and journey sections
-- Verified-testimonial placeholder
-- FAQ accordion
-- Lead/enquiry form interaction
-- Mobile navigation
-- Scroll reveal animations
-- WhatsApp CTA
-- Desktop/tablet/mobile responsive layout
+## Features & Highlights
 
-## Customer handoff checklist
-- Replace the mentor placeholder with the customer's approved photo.
-- Use the customer's official logo if supplied.
-- Connect the form to the customer's actual email/CRM/backend.
-- Replace placeholder testimonial area with verified, approved student stories.
-- Confirm all statistics, course durations and learner counts with the customer before publication.
-- Add Privacy Policy, Terms, Refund/Cancellation and any required legal pages.
-- Test all contact/WhatsApp links and forms before going live.
+- **Modern SaaS Aesthetics**: Clean typography (`Plus Jakarta Sans` & `Inter`), blueprint grid background, and responsive layouts.
+- **Split Hero with 30-Second Booking**: Direct consultation registration card with instant WhatsApp pre-fill.
+- **Interactive Target Score Planner**: Dynamic calculation widget for IELTS, PTE, OET, and CELPIP study plans.
+- **Real-Time Exam Filter Tabs**: Instantly filter between *All Exams*, *Study Abroad*, *PR & Immigration*, and *Healthcare / OET*.
+- **Exam Decision Matrix**: Detailed comparison matrix (IELTS vs PTE vs OET vs CELPIP).
+- **The English Pathshala Method (Bento Grid)**: 4 pedagogical pillars highlighting Cambridge-standard diagnostic evaluations, 24h essay annotations, and 1-on-1 Zoom speaking drills.
+- **Mentor Profile**: High-resolution portrait and credentials of Cambridge CELTA certified Prof. Avijit Majumdar.
+- **Student Scorecards**: Visual metric score meters with verified IDP, Pearson, and OET results.
+- **Interactive FAQ Accordion**: Smooth CSS rotating chevron toggles.
+- **Universal Modals**: Detailed syllabus popup, Privacy Policy, Terms & Disclaimers, and WhatsApp Success redirection.
+- **Zero AI Slop**: Human, authentic copy and clean vector SVG iconography.
+
+## Tech Stack
+
+- **HTML5**: Semantic, accessible markup with comprehensive ARIA tags.
+- **Vanilla CSS3**: Design-token based architecture with micro-interactions and smooth transitions.
+- **Vanilla JavaScript**: Lightweight, modular DOM event listeners and `localStorage` lead persistence.
+
+## Running Locally
+
+To run the local development server:
+
+```bash
+# Using Python
+python -m http.server 3000
+
+# Or using Node.js / npx
+npx serve .
+```
+
+Open `http://localhost:3000` in your browser.
