@@ -81,6 +81,29 @@ body.modal-open {
   overflow: hidden;
 }
 
+/* Smooth Scrollbar & Selection */
+::selection {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--navy-dark);
@@ -542,6 +565,51 @@ button, input, select {
   background-color: var(--border);
 }
 
+/* Global Framework Accreditation Strip */
+.accreditation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.accred-label {
+  font-weight: 600;
+  color: var(--navy-slate);
+}
+
+.accred-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.accred-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 0.74rem;
+  color: var(--navy-dark);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.accred-item svg {
+  color: #10b981;
+  flex-shrink: 0;
+}
+
 /* ================= THE UNIFIED INTERACTIVE EXAM HUB ================= */
 .hub-header {
   display: flex;
@@ -703,6 +771,31 @@ button, input, select {
 .pill-teal { background-color: var(--tag-teal-bg); color: var(--tag-teal-text); }
 .pill-amber { background-color: var(--tag-amber-bg); color: var(--tag-amber-text); }
 .pill-indigo { background-color: var(--tag-indigo-bg); color: var(--tag-indigo-text); }
+
+/* Course Card Top Accents & Cohort Tags */
+.card-ielts { border-top: 3px solid #2563eb; }
+.card-pte { border-top: 3px solid #0d9488; }
+.card-oet { border-top: 3px solid #d97706; }
+.card-celpip { border-top: 3px solid #4f46e5; }
+
+.head-score-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.cohort-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #059669;
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
 
 .mini-score-meter {
   height: 4px;
@@ -976,6 +1069,23 @@ button, input, select {
   border-color: #bfdbfe;
 }
 
+.why-card-top-tag {
+  margin-bottom: 12px;
+}
+
+.step-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background-color: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
 .why-icon-wrap {
   width: 44px;
   height: 44px;
@@ -1126,6 +1236,46 @@ button, input, select {
 .result-compact-card h3 {
   font-size: 1.05rem;
   margin-bottom: 2px;
+}
+
+/* Student Profile Avatar Chip */
+.res-profile-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.res-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.avatar-blue {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1d4ed8;
+  border: 2px solid #ffffff;
+}
+
+.avatar-teal {
+  background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
+  color: #0f766e;
+  border: 2px solid #ffffff;
+}
+
+.avatar-amber {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #b45309;
+  border: 2px solid #ffffff;
 }
 
 .res-target {
@@ -1402,6 +1552,28 @@ button, input, select {
   gap: 12px;
 }
 
+.form-trust-badges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  padding: 8px 12px;
+  background-color: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.trust-micro {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .form-guarantee-note {
   display: flex;
   align-items: center;
@@ -1472,6 +1644,29 @@ button, input, select {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  color: #cbd5e1;
+}
+
+.status-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.35);
+  animation: pulseDot 2s infinite;
 }
 
 /* ================= STICKY MOBILE ACTION BAR ================= */
