@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =======================================================
-     3. MASTER INTERACTIVE EXAM HUB TABS
+     3. MASTER INTERACTIVE EXAM HUB TABS & A11Y
      ======================================================= */
   const hubTabs = [
     { btn: document.getElementById("tabProgramsBtn"), view: document.getElementById("viewPrograms"), id: "programs" },
@@ -109,9 +109,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // W3C ARIA Tab Pattern Keyboard Navigation (Arrow Keys)
+  const tabButtonElements = hubTabs.map(t => t.btn).filter(Boolean);
+  tabButtonElements.forEach((btn, index) => {
+    btn.addEventListener("keydown", (e) => {
+      let targetIndex = null;
+      if (e.key === "ArrowRight") {
+        targetIndex = (index + 1) % tabButtonElements.length;
+      } else if (e.key === "ArrowLeft") {
+        targetIndex = (index - 1 + tabButtonElements.length) % tabButtonElements.length;
+      }
+
+      if (targetIndex !== null) {
+        e.preventDefault();
+        tabButtonElements[targetIndex].focus();
+        tabButtonElements[targetIndex].click();
+      }
+    });
+  });
+
   // Handle external links targeting a specific hub tab (e.g. from nav or hero)
   document.querySelectorAll("[data-hub-target]").forEach(link => {
-    link.addEventListener("click", (e) => {
+    link.addEventListener("click", () => {
       const target = link.dataset.hubTarget;
       if (target) {
         switchHubTab(target);
@@ -181,7 +200,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (plannerCTA) {
       plannerCTA.onclick = () => {
+        // Pre-select exam in booking form
         selectCourseInForm(data.name);
+
+        // Pre-populate target score goal
+        const userGoal = document.getElementById("userGoal");
+        if (userGoal) {
+          userGoal.value = `Target: ${activeScore.label} (${activeScore.duration} Plan)`;
+        }
+
+        // Match slot option
+        const userSlot = document.getElementById("userSlot");
+        if (userSlot && activeScore.batch) {
+          const batchLower = activeScore.batch.toLowerCase();
+          for (let i = 0; i < userSlot.options.length; i++) {
+            const slotText = userSlot.options[i].text.toLowerCase();
+            if (batchLower.includes("weekend") && slotText.includes("weekend")) {
+              userSlot.selectedIndex = i;
+              break;
+            } else if (batchLower.includes("evening") && slotText.includes("evening")) {
+              userSlot.selectedIndex = i;
+              break;
+            } else if (batchLower.includes("1-on-1") && slotText.includes("1-on-1")) {
+              userSlot.selectedIndex = i;
+              break;
+            }
+          }
+        }
       };
     }
   }
@@ -353,8 +398,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =======================================================
-     9. UNIFIED DEMO BOOKING FORM
+     9. UNIFIED DEMO BOOKING FORM (INLINE VALIDATION, NO ALERTS)
      ======================================================= */
+  function showFormError(message, inputElement) {
+    const feedback = document.getElementById("formFeedback");
+    if (feedback) {
+      feedback.textContent = message;
+      feedback.style.display = "block";
+    }
+    if (inputElement) {
+      inputElement.classList.add("input-error");
+      inputElement.focus();
+    }
+  }
+
+  function clearFormErrors() {
+    const feedback = document.getElementById("formFeedback");
+    if (feedback) {
+      feedback.style.display = "none";
+      feedback.textContent = "";
+    }
+    document.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
+  }
+
+  // Clear errors when the user types
+  ["userName", "userPhone", "userCourse"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("input", clearFormErrors);
+      el.addEventListener("change", clearFormErrors);
+    }
+  });
+
   function saveLeadToStorage(data) {
     try {
       const stored = JSON.parse(localStorage.getItem("ep_leads") || "[]");
@@ -372,26 +447,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if (unifiedDemoForm) {
     unifiedDemoForm.addEventListener("submit", (e) => {
       e.preventDefault();
+      clearFormErrors();
 
-      const name = document.getElementById("userName")?.value.trim() || "";
-      const phone = document.getElementById("userPhone")?.value.trim() || "";
-      const course = document.getElementById("userCourse")?.value || "";
-      const slot = document.getElementById("userSlot")?.value || "Flexible";
-      const goal = document.getElementById("userGoal")?.value.trim() || "Not specified";
+      const nameInput = document.getElementById("userName");
+      const phoneInput = document.getElementById("userPhone");
+      const courseSelect = document.getElementById("userCourse");
+      const slotSelect = document.getElementById("userSlot");
+      const goalInput = document.getElementById("userGoal");
+
+      const name = nameInput?.value.trim() || "";
+      const phone = phoneInput?.value.trim() || "";
+      const course = courseSelect?.value || "";
+      const slot = slotSelect?.value || "Flexible";
+      const goal = goalInput?.value.trim() || "Not specified";
 
       if (name.length < 2) {
-        alert("Please enter your full name.");
+        showFormError("Please enter your full name (at least 2 letters).", nameInput);
         return;
       }
 
       const cleanDigits = phone.replace(/\D/g, "");
       if (cleanDigits.length < 7 || cleanDigits.length > 15) {
-        alert("Please enter a valid phone or WhatsApp number.");
+        showFormError("Please enter a valid phone or WhatsApp number (7-15 digits).", phoneInput);
         return;
       }
 
       if (!course) {
-        alert("Please select your target exam.");
+        showFormError("Please choose your target examination from the list.", courseSelect);
         return;
       }
 
@@ -422,5 +504,31 @@ Please share available batch timings and confirm my demo with Prof. Avijit Majum
       unifiedDemoForm.reset();
     });
   }
+
+  /* =======================================================
+     10. SCROLLSPY & ACTIVE NAVIGATION LINK SYNC
+     ======================================================= */
+  const trackedSections = document.querySelectorAll("main section[id]");
+  const navMenuLinks = document.querySelectorAll(".nav-menu .nav-link");
+
+  function updateScrollSpy() {
+    const scrollPosition = window.scrollY + 140;
+
+    trackedSections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      const id = sec.getAttribute("id");
+
+      if (scrollPosition >= top && scrollPosition < top + height) {
+        navMenuLinks.forEach(link => {
+          const targetNav = link.dataset.navTarget || (link.getAttribute("href") || "").replace("#", "");
+          link.classList.toggle("active", targetNav === id);
+        });
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateScrollSpy, { passive: true });
+  updateScrollSpy();
 
 });

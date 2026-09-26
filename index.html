@@ -19,10 +19,44 @@
   <meta property="og:image" content="assets/og-image.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50%' y='65%' font-size='48' font-weight='800' font-family='system-ui,sans-serif' fill='white' text-anchor='middle'>EP</text></svg>" />
+
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org JSON-LD Structured Data for Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "English Pathshala",
+    "url": "https://englishpathshala.com",
+    "logo": "https://englishpathshala.com/assets/og-image.jpg",
+    "description": "Boutique test preparation institute for IELTS, PTE, OET, and CELPIP mentored by Cambridge CELTA certified Prof. Avijit Majumdar.",
+    "telephone": "+917003876568",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kolkata",
+      "addressRegion": "West Bengal",
+      "addressCountry": "IN"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Prof. Avijit Majumdar",
+      "jobTitle": "Lead Mentor & Academic Director",
+      "hasCredential": "Cambridge CELTA Certified"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "bestRating": "5",
+      "ratingCount": "180"
+    }
+  }
+  </script>
 
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -62,12 +96,12 @@
       </a>
 
       <nav class="nav-menu" aria-label="Main navigation">
-        <a href="#hub" class="nav-link active" data-hub-target="programs">Programs</a>
-        <a href="#hub" class="nav-link" data-hub-target="planner">Score Calculator</a>
-        <a href="#hub" class="nav-link" data-hub-target="compare">Compare Tests</a>
-        <a href="#why-us" class="nav-link">Why Us</a>
-        <a href="#results" class="nav-link">Results</a>
-        <a href="#contact" class="nav-link">FAQ &amp; Contact</a>
+        <a href="#hub" class="nav-link active" data-hub-target="programs" data-nav-target="hub">Programs</a>
+        <a href="#hub" class="nav-link" data-hub-target="planner" data-nav-target="hub">Score Calculator</a>
+        <a href="#hub" class="nav-link" data-hub-target="compare" data-nav-target="hub">Compare Tests</a>
+        <a href="#why-us" class="nav-link" data-nav-target="why-us">Why Us</a>
+        <a href="#results" class="nav-link" data-nav-target="results">Results</a>
+        <a href="#contact" class="nav-link" data-nav-target="contact">FAQ &amp; Contact</a>
       </nav>
 
       <div class="nav-right">
@@ -296,15 +330,26 @@
 
           <!-- Secondary Programs Expand Row -->
           <div class="secondary-programs-bar">
-            <span>Also coaching for <strong>TOEFL iBT</strong> &amp; <strong>Duolingo English Test (DET)</strong>.</span>
-            <button type="button" class="course-btn link-inline"
-              data-course="TOEFL & Duolingo"
-              data-score="TOEFL 100+ / DET 125+"
-              data-duration="2 - 6 Weeks"
-              data-acceptance="Accepted worldwide for US, Canadian, and European universities."
-              data-features="Fast-track 2-week to 6-week intensive format|ETS shortened TOEFL test structure &amp; note-taking strategy|Duolingo adaptive algorithm and webcam interview drills">
-              View TOEFL &amp; Duolingo Details →
-            </button>
+            <span>Also specialized in:</span>
+            <div class="secondary-buttons">
+              <button type="button" class="course-btn link-inline"
+                data-course="TOEFL iBT"
+                data-score="100+ / 120"
+                data-duration="4 - 8 Weeks"
+                data-acceptance="Accepted by 11,500+ universities worldwide including Ivy League, US, Canada, and Europe."
+                data-features="Shortened 2-hour TOEFL format mastery|Lecture note-taking techniques under rapid audio playback|Integrated speaking templates combining reading passages and lecture audio|Official ETS authentic test papers and scoring analysis">
+                TOEFL iBT Details →
+              </button>
+              <span class="sep">•</span>
+              <button type="button" class="course-btn link-inline"
+                data-course="Duolingo English Test"
+                data-score="125 - 140+ / 160"
+                data-duration="2 - 4 Weeks"
+                data-acceptance="Accepted by over 4,500 colleges &amp; universities in USA, Canada, and Ireland."
+                data-features="Read and complete C-test fill-in-the-blank vocabulary strategies|5-minute writing and interactive reading speed drills|Spoken responses with webcam eye-contact and posture readiness|Complete mock assessments on computer adaptive format">
+                Duolingo DET Details →
+              </button>
+            </div>
           </div>
 
         </div>
@@ -428,15 +473,23 @@
         <div class="why-grid">
 
           <!-- Pillar 1: Mentor -->
-          <div class="why-card">
-            <div class="why-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <div class="why-card why-mentor-card">
+            <div class="mentor-compact-header">
+              <div class="mentor-avatar-wrap">
+                <img src="assets/mentor.jpg" alt="Prof. Avijit Majumdar" class="mentor-avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                <div class="mentor-avatar-fallback" style="display: none;">AM</div>
+              </div>
+              <div class="mentor-meta-info">
+                <span class="cred-pill-accent">Cambridge CELTA Verified</span>
+                <h3>Prof. Avijit Majumdar</h3>
+                <small>Lead Mentor &amp; Academic Director</small>
+              </div>
             </div>
-            <h3>Cambridge CELTA Lead Mentor</h3>
-            <p>Direct coaching from <strong>Prof. Avijit Majumdar</strong> (MA English Literature, Cambridge CELTA certified). Over a decade of proven test training with 1,500+ successful admits.</p>
+            <p>Direct personal mentorship from <strong>Prof. Majumdar</strong> (MA English Literature, Cambridge CELTA certified). Over 10 years of classroom pedagogy with 1,500+ successful admits across IELTS, PTE, and OET.</p>
             <div class="why-badge-list">
               <span class="cred-pill">✓ Cambridge CELTA</span>
               <span class="cred-pill">✓ IDP &amp; BC Trained</span>
+              <span class="cred-pill">✓ 10+ Yrs Experience</span>
             </div>
           </div>
 
@@ -625,7 +678,9 @@
               <p>Speak directly with Prof. Majumdar to assess your diagnostic level and get your personalized timeline.</p>
             </div>
 
-            <form id="unifiedDemoForm" class="clean-form">
+            <form id="unifiedDemoForm" class="clean-form" novalidate>
+              <div id="formFeedback" class="form-feedback" style="display:none;" role="alert"></div>
+
               <div class="form-group">
                 <label for="userName">Full Name</label>
                 <input type="text" id="userName" name="name" placeholder="e.g. Rahul Sharma" required />
