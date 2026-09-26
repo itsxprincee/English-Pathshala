@@ -1452,9 +1452,10 @@ button, input, select {
 .meta-label {
   display: block;
   font-size: 0.72rem;
-  color: var(--text-muted);
+  color: #334155;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .modal-block {
@@ -1526,6 +1527,14 @@ button, input, select {
 @media (max-width: 1024px) {
   .courses-compact-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-grid, .results-compact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-mentor-card {
+    grid-column: span 2;
   }
 
   .planner-result-strip {

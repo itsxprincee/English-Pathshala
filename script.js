@@ -51,14 +51,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =======================================================
-     2. UNIVERSAL MODAL CONTROLLER
+     2. UNIVERSAL MODAL CONTROLLER & FOCUS TRAP
      ======================================================= */
+  let lastFocusedTrigger = null;
+
   function openModal(modalId) {
     const modalEl = document.getElementById(modalId);
     if (!modalEl) return;
+    lastFocusedTrigger = document.activeElement;
     modalEl.classList.add("active");
     modalEl.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
+
+    // Auto focus first interactive element
+    const focusable = modalEl.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable) {
+      setTimeout(() => focusable.focus(), 50);
+    }
   }
 
   function closeModal(modalEl) {
@@ -69,6 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const anyActive = document.querySelector(".modal.active");
     if (!anyActive) {
       document.body.classList.remove("modal-open");
+    }
+
+    if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === "function") {
+      lastFocusedTrigger.focus();
     }
   }
 
@@ -512,6 +525,14 @@ Please share available batch timings and confirm my demo with Prof. Avijit Majum
   const navMenuLinks = document.querySelectorAll(".nav-menu .nav-link");
 
   function updateScrollSpy() {
+    // If scrolled near top, highlight Home
+    if (window.scrollY < 180) {
+      navMenuLinks.forEach(link => {
+        link.classList.toggle("active", link.dataset.navTarget === "home");
+      });
+      return;
+    }
+
     const scrollPosition = window.scrollY + 140;
 
     trackedSections.forEach(sec => {
@@ -530,5 +551,40 @@ Please share available batch timings and confirm my demo with Prof. Avijit Majum
 
   window.addEventListener("scroll", updateScrollSpy, { passive: true });
   updateScrollSpy();
+
+  /* =======================================================
+     11. ADMIN UTILITIES FOR OFFLINE LEADS
+     ======================================================= */
+  window.getEPLeads = function() {
+    const leads = JSON.parse(localStorage.getItem("ep_leads") || "[]");
+    console.table(leads);
+    return leads;
+  };
+
+  window.exportEPLeadsCSV = function() {
+    const leads = JSON.parse(localStorage.getItem("ep_leads") || "[]");
+    if (!leads.length) {
+      alert("No leads found in storage to export.");
+      return;
+    }
+    const headers = ["Name", "Phone", "Course", "Slot", "Goal", "Source", "Date"];
+    const rows = leads.map(l => [
+      `"${(l.name || "").replace(/"/g, '""')}"`,
+      `"${(l.phone || "").replace(/"/g, '""')}"`,
+      `"${(l.course || "").replace(/"/g, '""')}"`,
+      `"${(l.slot || "").replace(/"/g, '""')}"`,
+      `"${(l.goal || "").replace(/"/g, '""')}"`,
+      `"${(l.source || "").replace(/"/g, '""')}"`,
+      `"${l.createdAt || ""}"`
+    ]);
+    const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `english_pathshala_leads_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
 });
