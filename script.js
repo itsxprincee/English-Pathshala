@@ -303,13 +303,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Pre-fill course when clicking "Book Demo" on a course card
+  // Pre-fill course when clicking "Book Demo" or "Enquire Now" on a course card
   document.querySelectorAll(".enroll-link").forEach(link => {
     link.addEventListener("click", () => {
       const courseFill = link.dataset.courseFill;
       if (courseFill) {
         selectCourseInForm(courseFill);
       }
+    });
+  });
+
+  /* =======================================================
+     5.1 COURSE CATEGORY FILTER
+     ======================================================= */
+  const filterPills = document.querySelectorAll(".filter-pill");
+  const courseCards = document.querySelectorAll(".course-mini-card[data-category]");
+
+  filterPills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      const filter = pill.dataset.filter;
+      filterPills.forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+
+      courseCards.forEach(card => {
+        const cat = card.dataset.category;
+        if (filter === "all" || cat === filter) {
+          card.style.display = "flex";
+        } else {
+          card.style.display = "none";
+        }
+      });
     });
   });
 

@@ -243,13 +243,21 @@
           </div>
         </div>
 
-        <!-- TAB VIEW 1: PROGRAMS (CLEAN 4-CARD GRID) -->
+        <!-- TAB VIEW 1: PROGRAMS (COMPLETE 12-COURSE CATALOG WITH CATEGORY FILTER) -->
         <div class="hub-view active" id="viewPrograms" role="tabpanel" aria-labelledby="tabProgramsBtn">
           
+          <!-- Category Filter Bar -->
+          <div class="course-filter-bar" role="tablist" aria-label="Course categories">
+            <button type="button" class="filter-pill active" data-filter="all">All Courses (12)</button>
+            <button type="button" class="filter-pill" data-filter="abroad">Study Abroad &amp; Immigration (6)</button>
+            <button type="button" class="filter-pill" data-filter="career">Fluency &amp; Career (3)</button>
+            <button type="button" class="filter-pill" data-filter="academic">School &amp; Competitive (3)</button>
+          </div>
+
           <div class="courses-compact-grid">
 
             <!-- 1. IELTS -->
-            <article class="course-mini-card card-ielts">
+            <article class="course-mini-card card-ielts" data-category="abroad">
               <div class="mini-card-head">
                 <div class="exam-lead-box">
                   <div class="mini-glyph glyph-blue">
@@ -257,34 +265,29 @@
                   </div>
                   <span class="exam-pill pill-blue">IELTS</span>
                 </div>
-                <div class="head-score-col">
-                  <span class="mini-score">Target: <strong>Band 7.5+</strong></span>
-                  <span class="cohort-tag">Batch: Mon &amp; Sat</span>
-                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
               </div>
-              <h3>IELTS Academic &amp; General</h3>
-              <p>Direct rubric coaching for IDP &amp; British Council formats. Daily essay grading and simulated mock interviews.</p>
-              <div class="mini-score-meter"><div class="mini-meter-fill fill-blue" style="width: 88%;"></div></div>
+              <h3>IELTS</h3>
+              <p class="course-subtitle">Score Band 7+ with expert strategies</p>
               <div class="mini-specs">
-                <span>⏱ 4–8 Weeks</span>
-                <span>👥 Max 8 Batch / 1-on-1</span>
-                <span>💻 Computer &amp; Paper</span>
+                <span>⏱ 6-8 weeks</span>
+                <span>👥 800+ Students</span>
               </div>
               <div class="mini-card-actions">
                 <button class="btn btn-secondary btn-sm course-btn" type="button"
                   data-course="IELTS"
-                  data-score="Band 7.5 - 8.5"
-                  data-duration="4 - 8 Weeks"
+                  data-score="Band 7.0 - 8.5+"
+                  data-duration="6 - 8 Weeks"
                   data-acceptance="Universities &amp; Immigration across UK, Canada, Australia, USA, and New Zealand."
                   data-features="Full 4-skill coverage (Listening, Reading, Writing, Speaking)|Daily 1-on-1 essay grading with annotated grammar &amp; band breakdown|One-on-one mock speaking interviews under real test conditions|Official Cambridge practice test banks (Books 1–19) included">
-                  View Syllabus
+                  Learn More
                 </button>
-                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="IELTS Academic">Book Demo</a>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="IELTS">Enquire Now</a>
               </div>
             </article>
 
             <!-- 2. PTE Academic -->
-            <article class="course-mini-card card-pte">
+            <article class="course-mini-card card-pte" data-category="abroad">
               <div class="mini-card-head">
                 <div class="exam-lead-box">
                   <div class="mini-glyph glyph-teal">
@@ -292,34 +295,29 @@
                   </div>
                   <span class="exam-pill pill-teal">PTE</span>
                 </div>
-                <div class="head-score-col">
-                  <span class="mini-score">Target: <strong>79+ / 90</strong></span>
-                  <span class="cohort-tag">AI Portal Access</span>
-                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
               </div>
               <h3>PTE Academic</h3>
-              <p>Algorithm-aligned training for oral fluency, repeat sentence rhythm, and templates for Summarize Spoken Text.</p>
-              <div class="mini-score-meter"><div class="mini-meter-fill fill-teal" style="width: 88%;"></div></div>
+              <p class="course-subtitle">AI-powered prep, results in 48 hours</p>
               <div class="mini-specs">
-                <span>⏱ 3–6 Weeks</span>
-                <span>👥 Max 8 Batch / 1-on-1</span>
-                <span>💻 100% Computer AI</span>
+                <span>⏱ 4-6 weeks</span>
+                <span>👥 400+ Students</span>
               </div>
               <div class="mini-card-actions">
                 <button class="btn btn-secondary btn-sm course-btn" type="button"
                   data-course="PTE Academic"
                   data-score="79+ / 90 (Superior English)"
-                  data-duration="3 - 6 Weeks"
+                  data-duration="4 - 6 Weeks"
                   data-acceptance="100% accepted for Australia PR (20 points), New Zealand PR, and UK study visas."
-                  data-features="Pearson AI algorithm scoring mechanics (Oral Fluency &amp; Pronunciation)|High-frequency repeat question sets from real recent exam administrations|Templates for Describe Image, Retell Lecture &amp; Write Essay|Microphone technique, headset pitch calibration, and mock software">
-                  View Syllabus
+                  data-features="Pearson AI algorithm scoring mechanics (Oral Fluency &amp; Pronunciation)|High-frequency repeat question sets from real recent exam administrations|Templates for Describe Image, Retell Lecture &amp; Write Essay|Microphone technique, headset pitch calibration, and AI mock portal">
+                  Learn More
                 </button>
-                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="PTE Academic">Book Demo</a>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="PTE Academic">Enquire Now</a>
               </div>
             </article>
 
             <!-- 3. OET -->
-            <article class="course-mini-card card-oet">
+            <article class="course-mini-card card-oet" data-category="abroad">
               <div class="mini-card-head">
                 <div class="exam-lead-box">
                   <div class="mini-glyph glyph-amber">
@@ -327,34 +325,29 @@
                   </div>
                   <span class="exam-pill pill-amber">OET</span>
                 </div>
-                <div class="head-score-col">
-                  <span class="mini-score">Target: <strong>Grade B / A</strong></span>
-                  <span class="cohort-tag">Shift-Friendly</span>
-                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.8</span>
               </div>
-              <h3>OET Healthcare</h3>
-              <p>Master medical referral and discharge letters plus clinical role-play speaking for UK NMC/GMC and Australia.</p>
-              <div class="mini-score-meter"><div class="mini-meter-fill fill-amber" style="width: 84%;"></div></div>
+              <h3>OET</h3>
+              <p class="course-subtitle">For healthcare professionals worldwide</p>
               <div class="mini-specs">
-                <span>⏱ 4–8 Weeks</span>
-                <span>👥 Shift-Friendly Hours</span>
-                <span>🏥 Clinical Scenarios</span>
+                <span>⏱ 8-10 weeks</span>
+                <span>👥 200+ Students</span>
               </div>
               <div class="mini-card-actions">
                 <button class="btn btn-secondary btn-sm course-btn" type="button"
-                  data-course="OET"
+                  data-course="OET Healthcare"
                   data-score="Grade B (350+) or Grade A"
-                  data-duration="4 - 8 Weeks"
+                  data-duration="8 - 10 Weeks"
                   data-acceptance="Recognized by UK NMC, GMC, Irish Nursing Board, and Australian Medical Board."
                   data-features="Step-by-step case notes selection for flawless referral and discharge letters|Doctor-patient &amp; Nurse-patient clinical consultation speaking drills|Medical listening extracts with real hospital accents and clinical jargon|Late evening &amp; weekend batches scheduled around hospital shift duties">
-                  View Syllabus
+                  Learn More
                 </button>
-                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="OET Healthcare">Book Demo</a>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="OET Healthcare">Enquire Now</a>
               </div>
             </article>
 
             <!-- 4. CELPIP -->
-            <article class="course-mini-card card-celpip">
+            <article class="course-mini-card card-celpip" data-category="abroad">
               <div class="mini-card-head">
                 <div class="exam-lead-box">
                   <div class="mini-glyph glyph-indigo">
@@ -362,56 +355,267 @@
                   </div>
                   <span class="exam-pill pill-indigo">CELPIP</span>
                 </div>
-                <div class="head-score-col">
-                  <span class="mini-score">Target: <strong>CLB 9 - 10+</strong></span>
-                  <span class="cohort-tag">Express Entry</span>
-                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
               </div>
-              <h3>CELPIP General</h3>
-              <p>Canadian English exam approved by IRCC. Everyday workplace scenarios, email structures, and speaking countdowns.</p>
-              <div class="mini-score-meter"><div class="mini-meter-fill fill-indigo" style="width: 90%;"></div></div>
+              <h3>CELPIP</h3>
+              <p class="course-subtitle">Canada immigration &amp; citizenship</p>
               <div class="mini-specs">
-                <span>⏱ 3–6 Weeks</span>
-                <span>👥 Max 8 Batch / 1-on-1</span>
-                <span>🍁 IRCC Approved</span>
+                <span>⏱ 4-6 weeks</span>
+                <span>👥 150+ Students</span>
               </div>
               <div class="mini-card-actions">
                 <button class="btn btn-secondary btn-sm course-btn" type="button"
-                  data-course="CELPIP"
+                  data-course="CELPIP General"
                   data-score="CLB 9+ (Maximum CRS Points)"
-                  data-duration="3 - 6 Weeks"
+                  data-duration="4 - 6 Weeks"
                   data-acceptance="Approved by Immigration, Refugees and Citizenship Canada (IRCC) for Express Entry."
                   data-features="Step-by-step formal &amp; informal email structures for Task 1|8 speaking task drill sets practiced under strict onscreen countdown timers|Canadian idiom, pronunciation, and workplace vocabulary mastery|Full computer mock exams on identical test interface">
-                  View Syllabus
+                  Learn More
                 </button>
-                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="CELPIP General">Book Demo</a>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="CELPIP General">Enquire Now</a>
               </div>
             </article>
 
-          </div>
+            <!-- 5. TOEFL iBT -->
+            <article class="course-mini-card card-cyan" data-category="abroad">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-cyan">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                  </div>
+                  <span class="exam-pill pill-cyan">TOEFL</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.8</span>
+              </div>
+              <h3>TOEFL iBT</h3>
+              <p class="course-subtitle">US university admissions</p>
+              <div class="mini-specs">
+                <span>⏱ 6-8 weeks</span>
+                <span>👥 300+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="TOEFL iBT"
+                  data-score="100+ / 120"
+                  data-duration="6 - 8 Weeks"
+                  data-acceptance="Accepted by 11,500+ universities worldwide including Ivy League, US, Canada, and Europe."
+                  data-features="Shortened 2-hour TOEFL format mastery|Lecture note-taking techniques under rapid audio playback|Integrated speaking templates combining reading passages and lecture audio|Official ETS authentic test papers and scoring analysis">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="TOEFL iBT">Enquire Now</a>
+              </div>
+            </article>
 
-          <!-- Secondary Programs Expand Row -->
-          <div class="secondary-programs-bar">
-            <span>Also specialized in:</span>
-            <div class="secondary-buttons">
-              <button type="button" class="course-btn link-inline"
-                data-course="TOEFL iBT"
-                data-score="100+ / 120"
-                data-duration="4 - 8 Weeks"
-                data-acceptance="Accepted by 11,500+ universities worldwide including Ivy League, US, Canada, and Europe."
-                data-features="Shortened 2-hour TOEFL format mastery|Lecture note-taking techniques under rapid audio playback|Integrated speaking templates combining reading passages and lecture audio|Official ETS authentic test papers and scoring analysis">
-                TOEFL iBT Details →
-              </button>
-              <span class="sep">•</span>
-              <button type="button" class="course-btn link-inline"
-                data-course="Duolingo English Test"
-                data-score="125 - 140+ / 160"
-                data-duration="2 - 4 Weeks"
-                data-acceptance="Accepted by over 4,500 colleges &amp; universities in USA, Canada, and Ireland."
-                data-features="Read and complete C-test fill-in-the-blank vocabulary strategies|5-minute writing and interactive reading speed drills|Spoken responses with webcam eye-contact and posture readiness|Complete mock assessments on computer adaptive format">
-                Duolingo DET Details →
-              </button>
-            </div>
+            <!-- 6. Duolingo English Test -->
+            <article class="course-mini-card card-emerald" data-category="abroad">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-emerald">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  </div>
+                  <span class="exam-pill pill-emerald">DET</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
+              </div>
+              <h3>Duolingo English Test</h3>
+              <p class="course-subtitle">Quick, affordable certification</p>
+              <div class="mini-specs">
+                <span>⏱ 2-4 weeks</span>
+                <span>👥 250+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="Duolingo English Test"
+                  data-score="125 - 140+ / 160"
+                  data-duration="2 - 4 Weeks"
+                  data-acceptance="Accepted by over 4,500 colleges &amp; universities in USA, Canada, and Ireland."
+                  data-features="Read and complete C-test fill-in-the-blank vocabulary strategies|5-minute writing and interactive reading speed drills|Spoken responses with webcam eye-contact and posture readiness|Complete mock assessments on computer adaptive format">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="Duolingo English Test">Enquire Now</a>
+              </div>
+            </article>
+
+            <!-- 7. Spoken English -->
+            <article class="course-mini-card card-violet" data-category="career">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-violet">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                  </div>
+                  <span class="exam-pill pill-violet">Fluency</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
+              </div>
+              <h3>Spoken English</h3>
+              <p class="course-subtitle">Fluency &amp; confidence building</p>
+              <div class="mini-specs">
+                <span>⏱ 8-12 weeks</span>
+                <span>👥 500+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="Spoken English"
+                  data-score="C1/C2 Fluent English"
+                  data-duration="8 - 12 Weeks"
+                  data-acceptance="Corporate workplaces, MNC interviews, public speaking, and international travel."
+                  data-features="Elimination of Mother Tongue Influence (MTI) and speech hesitation|Extempore speaking, debate drills, and spontaneous conversational framing|Pronunciation, syllable stress, intonation, and rhythm training|Real-life workplace role-play and social conversation practice">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="Spoken English">Enquire Now</a>
+              </div>
+            </article>
+
+            <!-- 8. Interview Preparation -->
+            <article class="course-mini-card card-rose" data-category="career">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-rose">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                  </div>
+                  <span class="exam-pill pill-rose">Interview</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.8</span>
+              </div>
+              <h3>Interview Preparation</h3>
+              <p class="course-subtitle">Visa &amp; job interview mastery</p>
+              <div class="mini-specs">
+                <span>⏱ 2-4 weeks</span>
+                <span>👥 180+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="Interview Preparation"
+                  data-score="High-Impact Presentation"
+                  data-duration="2 - 4 Weeks"
+                  data-acceptance="US/UK Visa embassy interviews, MNC HR rounds, and executive leadership positions."
+                  data-features="STAR technique (Situation, Task, Action, Result) for behavioral answers|Embassy visa interview simulation and cross-question handling|Body language, executive voice modulation, and camera presence|Tailored answer formulation matching your exact resume and job profile">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="Interview Preparation">Enquire Now</a>
+              </div>
+            </article>
+
+            <!-- 9. English Grammar -->
+            <article class="course-mini-card card-sky" data-category="career">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-sky">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                  </div>
+                  <span class="exam-pill pill-sky">Grammar</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
+              </div>
+              <h3>English Grammar</h3>
+              <p class="course-subtitle">Foundation to advanced</p>
+              <div class="mini-specs">
+                <span>⏱ 6-8 weeks</span>
+                <span>👥 350+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="English Grammar"
+                  data-score="Error-Free English Standard"
+                  data-duration="6 - 8 Weeks"
+                  data-acceptance="Foundational mastery for writing, competitive exams, and professional correspondence."
+                  data-features="Tenses, subject-verb agreement, and complex sentence structures|Active &amp; passive voice, direct-indirect speech, and modal auxiliaries|Common Indian English errors and prepositions disambiguation|Daily worksheets with line-by-line correction and explanatory sessions">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="English Grammar">Enquire Now</a>
+              </div>
+            </article>
+
+            <!-- 10. Government Exams -->
+            <article class="course-mini-card card-orange" data-category="academic">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-orange">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                  </div>
+                  <span class="exam-pill pill-orange">Govt Exams</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.8</span>
+              </div>
+              <h3>Government Exams</h3>
+              <p class="course-subtitle">SSC, Bank, Railways English</p>
+              <div class="mini-specs">
+                <span>⏱ 8-12 weeks</span>
+                <span>👥 400+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="Government Exams English"
+                  data-score="Top Percentile English Marks"
+                  data-duration="8 - 12 Weeks"
+                  data-acceptance="SSC CGL, CHSL, Bank PO, IBPS, Railways, and State PSC examinations."
+                  data-features="Cloze test, para-jumbles, and reading comprehension speed hacks|Error spotting and sentence improvement shortcut rules|Vocab flashcards: 1,500+ high-frequency synonyms, antonyms &amp; idioms|Speed test series with negative marking analysis">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="Government Exams">Enquire Now</a>
+              </div>
+            </article>
+
+            <!-- 11. Board Exam English -->
+            <article class="course-mini-card card-teal-dark" data-category="academic">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-teal-dark">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                  </div>
+                  <span class="exam-pill pill-teal-dark">Board Exam</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
+              </div>
+              <h3>Board Exam English</h3>
+              <p class="course-subtitle">CBSE/ICSE Class IX-XII</p>
+              <div class="mini-specs">
+                <span>⏱ Academic Year</span>
+                <span>👥 300+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="Board Exam English"
+                  data-score="95%+ Score Target"
+                  data-duration="Full Academic Year"
+                  data-acceptance="CBSE &amp; ICSE / ISC Class IX, X, XI, and XII board examinations."
+                  data-features="Exhaustive chapter-by-chapter literature explanation and theme analysis|CBSE/ICSE board format writing skills: Letters, Articles, Notices, Speeches|Grammar section 100% accuracy training with previous 10-year question banks|Board-pattern mock test series with board examiner marking rubrics">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="Board Exam English">Enquire Now</a>
+              </div>
+            </article>
+
+            <!-- 12. English Olympiad -->
+            <article class="course-mini-card card-gold" data-category="academic">
+              <div class="mini-card-head">
+                <div class="exam-lead-box">
+                  <div class="mini-glyph glyph-gold">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                  </div>
+                  <span class="exam-pill pill-gold">Olympiad</span>
+                </div>
+                <span class="rating-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> 4.9</span>
+              </div>
+              <h3>English Olympiad</h3>
+              <p class="course-subtitle">Competitive excellence</p>
+              <div class="mini-specs">
+                <span>⏱ 12-16 weeks</span>
+                <span>👥 100+ Students</span>
+              </div>
+              <div class="mini-card-actions">
+                <button class="btn btn-secondary btn-sm course-btn" type="button"
+                  data-course="English Olympiad"
+                  data-score="State &amp; National Rank Holder"
+                  data-duration="12 - 16 Weeks"
+                  data-acceptance="IEO (SOF), Crest, SilverZone, and international school Olympiads."
+                  data-features="Higher-order thinking skills (HOTS) and critical reading exercises|Advanced lexical analysis, etymology, and contextual nuance drills|Pattern recognition for Olympiad-level grammar and sentence logic|Timed computer and paper mock assessments with rank analysis">
+                  Learn More
+                </button>
+                <a href="#contact" class="btn btn-primary btn-sm enroll-link" data-course-fill="English Olympiad">Enquire Now</a>
+              </div>
+            </article>
+
           </div>
 
         </div>
@@ -815,16 +1019,21 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="userCourse">Target Exam</label>
+                  <label for="userCourse">Target Exam / Course</label>
                   <select id="userCourse" name="course" required>
-                    <option value="">Select Exam</option>
-                    <option value="IELTS Academic">IELTS Academic</option>
-                    <option value="IELTS General">IELTS General (PR)</option>
+                    <option value="">Select Course</option>
+                    <option value="IELTS">IELTS</option>
                     <option value="PTE Academic">PTE Academic</option>
-                    <option value="OET Healthcare">OET (Medicine / Nursing)</option>
-                    <option value="CELPIP General">CELPIP (Canada PR)</option>
+                    <option value="OET">OET (Healthcare)</option>
+                    <option value="CELPIP">CELPIP (Canada PR)</option>
                     <option value="TOEFL iBT">TOEFL iBT</option>
                     <option value="Duolingo English Test">Duolingo English Test</option>
+                    <option value="Spoken English">Spoken English</option>
+                    <option value="Interview Preparation">Interview Preparation</option>
+                    <option value="English Grammar">English Grammar</option>
+                    <option value="Government Exams">Government Exams (SSC/Bank)</option>
+                    <option value="Board Exam English">Board Exam English (CBSE/ICSE)</option>
+                    <option value="English Olympiad">English Olympiad</option>
                   </select>
                 </div>
               </div>

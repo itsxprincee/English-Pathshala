@@ -758,6 +758,15 @@ button, input, select {
   border: 1px solid #c7d2fe;
 }
 
+.glyph-cyan { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); color: #0284c7; border: 1px solid #bae6fd; }
+.glyph-emerald { background: linear-gradient(135deg, #d1fae5, #ecfdf5); color: #059669; border: 1px solid #a7f3d0; }
+.glyph-violet { background: linear-gradient(135deg, #ede9fe, #f5f3ff); color: #7c3aed; border: 1px solid #ddd6fe; }
+.glyph-rose { background: linear-gradient(135deg, #ffe4e6, #fff1f2); color: #e11d48; border: 1px solid #fecdd3; }
+.glyph-sky { background: linear-gradient(135deg, #e0f2fe, #f0f9ff); color: #0369a1; border: 1px solid #bae6fd; }
+.glyph-orange { background: linear-gradient(135deg, #ffedd5, #fff7ed); color: #ea580c; border: 1px solid #fed7aa; }
+.glyph-teal-dark { background: linear-gradient(135deg, #ccfbf1, #f0fdfa); color: #0f766e; border: 1px solid #99f6e4; }
+.glyph-gold { background: linear-gradient(135deg, #fef3c7, #fffbeb); color: #d97706; border: 1px solid #fde68a; }
+
 .exam-pill {
   font-size: 0.68rem;
   font-weight: 700;
@@ -771,30 +780,87 @@ button, input, select {
 .pill-teal { background-color: var(--tag-teal-bg); color: var(--tag-teal-text); }
 .pill-amber { background-color: var(--tag-amber-bg); color: var(--tag-amber-text); }
 .pill-indigo { background-color: var(--tag-indigo-bg); color: var(--tag-indigo-text); }
+.pill-cyan { background-color: #e0f2fe; color: #0284c7; }
+.pill-emerald { background-color: #d1fae5; color: #059669; }
+.pill-violet { background-color: #ede9fe; color: #7c3aed; }
+.pill-rose { background-color: #ffe4e6; color: #e11d48; }
+.pill-sky { background-color: #e0f2fe; color: #0369a1; }
+.pill-orange { background-color: #ffedd5; color: #ea580c; }
+.pill-teal-dark { background-color: #ccfbf1; color: #0f766e; }
+.pill-gold { background-color: #fef3c7; color: #d97706; }
 
-/* Course Card Top Accents & Cohort Tags */
+/* Course Card Top Accents */
 .card-ielts { border-top: 3px solid #2563eb; }
 .card-pte { border-top: 3px solid #0d9488; }
 .card-oet { border-top: 3px solid #d97706; }
 .card-celpip { border-top: 3px solid #4f46e5; }
+.card-cyan { border-top: 3px solid #0284c7; }
+.card-emerald { border-top: 3px solid #059669; }
+.card-violet { border-top: 3px solid #7c3aed; }
+.card-rose { border-top: 3px solid #e11d48; }
+.card-sky { border-top: 3px solid #0284c7; }
+.card-orange { border-top: 3px solid #ea580c; }
+.card-teal-dark { border-top: 3px solid #0f766e; }
+.card-gold { border-top: 3px solid #d97706; }
 
-.head-score-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
+/* Rating Badge & Subtitle */
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #92400e;
+  background-color: #fef3c7;
+  border: 1px solid #fde68a;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
 }
 
-.cohort-tag {
-  font-size: 0.65rem;
+.rating-badge svg {
+  color: #f59e0b;
+}
+
+.course-subtitle {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+/* Category Filter Bar */
+.course-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #059669;
-  background-color: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  padding: 1px 6px;
+  color: var(--text-muted);
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.filter-pill:hover {
+  color: var(--navy-dark);
+  border-color: #cbd5e1;
+}
+
+.filter-pill.active {
+  background-color: var(--navy-dark);
+  color: #ffffff;
+  border-color: var(--navy-dark);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
 }
 
 .mini-score-meter {
