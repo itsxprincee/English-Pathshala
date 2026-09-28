@@ -314,27 +314,105 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* =======================================================
-     5.1 COURSE CATEGORY FILTER
+     5.1 ADVANCED COURSE SEARCH & CATEGORY FILTERING
      ======================================================= */
   const filterPills = document.querySelectorAll(".filter-pill");
-  const courseCards = document.querySelectorAll(".course-mini-card[data-category]");
+  const courseCards = document.querySelectorAll(".course-card[data-category]");
+  const courseSearchInput = document.getElementById("courseSearchInput");
+  const courseSearchClear = document.getElementById("courseSearchClear");
+  const courseStatusTxt = document.getElementById("courseStatusTxt");
+  const courseNoResults = document.getElementById("courseNoResults");
+  const resetCourseFilterBtn = document.getElementById("resetCourseFilterBtn");
 
+  let currentCategory = "all";
+  let currentSearchQuery = "";
+
+  function applyCourseFilters() {
+    let visibleCount = 0;
+    const query = currentSearchQuery.trim().toLowerCase();
+
+    courseCards.forEach(card => {
+      const category = card.dataset.category || "";
+      const textContent = card.textContent.toLowerCase();
+
+      const matchesCategory = currentCategory === "all" || category === currentCategory;
+      const matchesSearch = !query || textContent.includes(query);
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = "flex";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    // Update status text
+    if (courseStatusTxt) {
+      if (query && currentCategory !== "all") {
+        courseStatusTxt.textContent = `Showing ${visibleCount} program${visibleCount === 1 ? "" : "s"} matching "${query}" in this category`;
+      } else if (query) {
+        courseStatusTxt.textContent = `Showing ${visibleCount} program${visibleCount === 1 ? "" : "s"} matching "${query}"`;
+      } else if (currentCategory !== "all") {
+        const activePill = document.querySelector(`.filter-pill[data-filter="${currentCategory}"] span`);
+        const catName = activePill ? activePill.textContent : "selected category";
+        courseStatusTxt.textContent = `Showing ${visibleCount} certified programs in ${catName}`;
+      } else {
+        courseStatusTxt.textContent = `Showing all 12 certified programs`;
+      }
+    }
+
+    // Toggle Empty State
+    if (courseNoResults) {
+      courseNoResults.style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    // Toggle Clear Search Button
+    if (courseSearchClear) {
+      courseSearchClear.style.display = query ? "flex" : "none";
+    }
+  }
+
+  // Category Filter Pill Clicks
   filterPills.forEach(pill => {
     pill.addEventListener("click", () => {
-      const filter = pill.dataset.filter;
+      const filter = pill.dataset.filter || "all";
+      currentCategory = filter;
       filterPills.forEach(p => p.classList.remove("active"));
       pill.classList.add("active");
-
-      courseCards.forEach(card => {
-        const cat = card.dataset.category;
-        if (filter === "all" || cat === filter) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
+      applyCourseFilters();
     });
   });
+
+  // Real-Time Search Input
+  if (courseSearchInput) {
+    courseSearchInput.addEventListener("input", (e) => {
+      currentSearchQuery = e.target.value;
+      applyCourseFilters();
+    });
+  }
+
+  // Clear Search Button
+  if (courseSearchClear) {
+    courseSearchClear.addEventListener("click", () => {
+      if (courseSearchInput) {
+        courseSearchInput.value = "";
+        courseSearchInput.focus();
+      }
+      currentSearchQuery = "";
+      applyCourseFilters();
+    });
+  }
+
+  // Reset Button in Empty State
+  if (resetCourseFilterBtn) {
+    resetCourseFilterBtn.addEventListener("click", () => {
+      currentCategory = "all";
+      currentSearchQuery = "";
+      if (courseSearchInput) courseSearchInput.value = "";
+      filterPills.forEach(p => p.classList.toggle("active", p.dataset.filter === "all"));
+      applyCourseFilters();
+    });
+  }
 
   /* =======================================================
      6. COURSE DETAILS MODAL
@@ -393,10 +471,10 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =======================================================
      7. FAQ ACCORDION
      ======================================================= */
-  const faqItems = document.querySelectorAll(".faq-item");
+  const faqItems = document.querySelectorAll(".acc-item, .faq-item");
 
   faqItems.forEach(item => {
-    const btn = item.querySelector(".faq-q");
+    const btn = item.querySelector(".acc-btn, .faq-q");
     if (!btn) return;
 
     btn.addEventListener("click", () => {
@@ -545,7 +623,7 @@ Please share available batch timings and confirm my demo with Prof. Avijit Majum
      10. SCROLLSPY & ACTIVE NAVIGATION LINK SYNC
      ======================================================= */
   const trackedSections = document.querySelectorAll("main section[id]");
-  const navMenuLinks = document.querySelectorAll(".nav-menu .nav-link");
+  const navMenuLinks = document.querySelectorAll(".nav-links .nav-link, .nav-menu .nav-link");
 
   function updateScrollSpy() {
     // If scrolled near top, highlight Home
